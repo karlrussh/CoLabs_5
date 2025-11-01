@@ -19,7 +19,20 @@ public class GameManager : MonoBehaviour
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
 
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        Instance = this;
+        if (PlayerManager.Instance != null)
+        {
+            UpdateGameState(GameState.GameStarted); // Change later
+
+        }
+        else
+        {
+            Debug.LogWarning("PlayerManager null");
+        }
+            
+    } 
 
     public void UpdateGameState(GameState newState)
     {
@@ -67,7 +80,7 @@ public class GameManager : MonoBehaviour
 
     private void HandleGameStarted()
     {
-        throw new NotImplementedException();
+        PlayerManager.Instance.UpdatePlayerState(PlayerState.InThirdPerson);
     }
 
     private void HandleDialogue()
