@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -13,25 +14,36 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
-    
 
+    private void OnEnable()
+    {
+        ControlsManager.OnPlayerJump += PlayerJump;
+    }
 
-    // Update is called once per frame
+    private void OnDisable()
+    {
+        ControlsManager.OnPlayerJump -= PlayerJump;
+    }
+
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && IsGrounded())
-        {
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
-        }
+        Flip();
+    }
 
-        if (Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
+    private void PlayerJump()
+    {
+        if (!IsGrounded()) return;
+        
+        if (rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }
-
-        Flip();
+        else
+        {
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
+        }
     }
 
     private bool IsGrounded()

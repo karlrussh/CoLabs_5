@@ -15,6 +15,8 @@ public class ControlsManager : MonoBehaviour
     public static event Action OnAimStart;
     public static event Action OnAimStop;
 
+    public static event Action OnPlayerJump;
+
     void Awake() => Instance = this;
 
     private void OnEnable()
@@ -57,11 +59,16 @@ public class ControlsManager : MonoBehaviour
 
             //Debug.Log("Stopped Aiming");
         }
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            OnPlayerJump?.Invoke();
+        }
     }
 
     private void HandleGameStateChanged(GameState state)
     {
-        // Disables playr input when in cutscene or dialogue
+        // Disables player input when in cutscene or dialogue
         if (state == GameState.Cutscene || state == GameState.Dialogue)
         {
             enabled = false;
