@@ -15,19 +15,40 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    private bool _canMove;
+
     private void OnEnable()
     {
         ControlsManager.OnPlayerJump += PlayerJump;
+        PlayerManager.OnPlayerStateChanged += HandlePlayerStateChange;
     }
 
     private void OnDisable()
     {
         ControlsManager.OnPlayerJump -= PlayerJump;
+        PlayerManager.OnPlayerStateChanged -= HandlePlayerStateChange;
+    }
+
+    private void HandlePlayerStateChange(PlayerState state)
+    {
+        switch (state)
+        {
+            case PlayerState.InThirdPerson:
+                _canMove = true;
+                break;
+            case PlayerState.InFirstPerson:
+                _canMove = false;
+                horizontal = 0f;
+                break;
+        }
     }
 
     void Update()
     {
-        horizontal = Input.GetAxisRaw("Horizontal");
+        if (_canMove)
+        {
+            horizontal = Input.GetAxisRaw("Horizontal");
+        }
 
         Flip();
     }
@@ -35,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
     private void PlayerJump()
     {
         if (!IsGrounded()) return;
-        
+
         if (rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
