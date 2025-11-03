@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &80441453957036462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2174396106052302225}
+  m_Layer: 0
+  m_Name: LookAtPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2174396106052302225
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 80441453957036462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1260732526630699997}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1124026782191242654
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,6 +43,7 @@ GameObject:
   - component: {fileID: 7356867384281745260}
   - component: {fileID: -3323689391256997604}
   - component: {fileID: -2111122764804321878}
+  - component: {fileID: 586251149777010671}
   m_Layer: 0
   m_Name: NunPlayer3D
   m_TagString: Untagged
@@ -34,6 +66,7 @@ Transform:
   m_Children:
   - {fileID: 4942419514237698437}
   - {fileID: 1512006332843628164}
+  - {fileID: 2174396106052302225}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7356867384281745260
@@ -102,6 +135,27 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &586251149777010671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124026782191242654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a0b320a2a5ebe6e2b5e5684f1622328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cinemachinePositionComposer: {fileID: 0}
+  _lookAtPoint: {fileID: 80441453957036462}
+  ThirdPersonCamPos: 10
+  FirstPersonCamPos: 0
+  TransitionTime: 0.6
+  lapThirdPersonPos: 0
+  lapFirstPersonPos: 2
+  lapFirstPersonRotate: {x: 0, y: 0.5, z: 0, w: 0.8660254}
+  lapThirdPersonRotate: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &3475246321501220001
 GameObject:
   m_ObjectHideFlags: 0

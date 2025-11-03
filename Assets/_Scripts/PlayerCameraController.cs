@@ -19,9 +19,8 @@ public class PlayerCameraController : MonoBehaviour
     [Header("LookAtPointSettings")]
     [SerializeField] private float lapThirdPersonPos;
     [SerializeField] private float lapFirstPersonPos;
-    [SerializeField] private Quaternion lapFirstPersonRotate;
     [SerializeField] private Quaternion lapThirdPersonRotate;
-
+    [SerializeField] private Quaternion lapFirstPersonRotate;
 
     private void OnEnable()
     {
@@ -56,7 +55,7 @@ public class PlayerCameraController : MonoBehaviour
     {
         DOTween.To(() => _cinemachinePositionComposer.CameraDistance, x => _cinemachinePositionComposer.CameraDistance = x, _moveToTween, TransitionTime);
 
-        _lookAtPoint.transform.DOMove(new Vector3(_lapMoveToTween, 0f, 0f), TransitionTime);
+        _lookAtPoint.transform.DOMove(new Vector3(_lapMoveToTween, _lookAtPoint.transform.position.y, _lookAtPoint.transform.position.z), TransitionTime);
         _lookAtPoint.transform.DORotateQuaternion(_lapRotationTween, TransitionTime);
 
         yield return null;

@@ -588,9 +588,9 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &977486743 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1124026782191242654, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
+--- !u!4 &859125512 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2174396106052302225, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
   m_PrefabInstance: {fileID: 1907097771}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1870848523
@@ -604,6 +604,7 @@ GameObject:
   - component: {fileID: 1870848526}
   - component: {fileID: 1870848525}
   - component: {fileID: 1870848524}
+  - component: {fileID: 1870848527}
   m_Layer: 0
   m_Name: CineMachine2D
   m_TagString: Untagged
@@ -662,7 +663,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 2048201465}
+    TrackingTarget: {fileID: 859125512}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -700,6 +701,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870848527
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870848523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: 0
 --- !u!1001 &1907097771
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -708,6 +722,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 586251149777010671, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
+      propertyPath: _cinemachinePositionComposer
+      value: 
+      objectReference: {fileID: 1870848524}
     - target: {fileID: 1124026782191242654, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
       propertyPath: m_Name
       value: NunPlayer3D
@@ -755,32 +773,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1124026782191242654, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2048201466}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
---- !u!4 &2048201465 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1260732526630699997, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
-  m_PrefabInstance: {fileID: 1907097771}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2048201466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 977486743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a0b320a2a5ebe6e2b5e5684f1622328, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _cinemachinePositionComposer: {fileID: 1870848524}
-  ThirdPersonCamPos: 10
-  FirstPersonCamPos: 0
-  TransitionTime: 0.6
 --- !u!1001 &5820584350448526246
 PrefabInstance:
   m_ObjectHideFlags: 0
