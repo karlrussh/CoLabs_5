@@ -3,16 +3,25 @@ using UnityEngine;
 using DG.Tweening;
 using Unity.Cinemachine;
 using System.Collections;
+using Unity.Mathematics;
 
 public class PlayerCameraController : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private CinemachinePositionComposer _cinemachinePositionComposer;
+    [SerializeField] private GameObject _lookAtPoint;
 
     [Header("CameraSettings")]
     [SerializeField] private float ThirdPersonCamPos;
     [SerializeField] private float FirstPersonCamPos;
     [SerializeField] private float TransitionTime;
+
+    [Header("LookAtPointSettings")]
+    [SerializeField] private float lapThirdPersonPos;
+    [SerializeField] private float lapFirstPersonPos;
+    [SerializeField] private Quaternion lapFirstPersonRotate;
+    [SerializeField] private Quaternion lapThirdPersonRotate;
+
 
     private void OnEnable()
     {
@@ -29,23 +38,26 @@ public class PlayerCameraController : MonoBehaviour
         switch (state)
         {
             case PlayerState.InThirdPerson:
-                MoveCameraTo(ThirdPersonCamPos);
+                MoveCameraTo(ThirdPersonCamPos, lapThirdPersonPos, lapThirdPersonRotate);
                 break;
             case PlayerState.InFirstPerson:
-                MoveCameraTo(FirstPersonCamPos);
+                MoveCameraTo(FirstPersonCamPos, lapFirstPersonPos, lapFirstPersonRotate);
                 break;
         }
     }
 
-    private void MoveCameraTo(float _moveTo)
+    private void MoveCameraTo(float _moveTo, float _lapMoveTo, Quaternion _lapRotation)
     {
         StopAllCoroutines();
-        StartCoroutine(TweenMovement(_moveTo));
+        StartCoroutine(TweenMovement(_moveTo, _lapMoveTo, _lapRotation));
     }
 
-    private IEnumerator TweenMovement(float _moveToTween)
+    private IEnumerator TweenMovement(float _moveToTween, float _lapMoveToTween, Quaternion _lapRotationTween)
     {
         DOTween.To(() => _cinemachinePositionComposer.CameraDistance, x => _cinemachinePositionComposer.CameraDistance = x, _moveToTween, TransitionTime);
+
+        _lookAtPoint.transform.DOMove(new Vector3(_lapMoveToTween, 0f, 0f), TransitionTime);
+        _lookAtPoint.transform.DORotateQuaternion(_lapRotationTween, TransitionTime);
 
         yield return null;
     }
