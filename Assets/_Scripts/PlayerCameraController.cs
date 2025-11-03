@@ -19,8 +19,8 @@ public class PlayerCameraController : MonoBehaviour
     [Header("LookAtPointSettings")]
     [SerializeField] private float lapThirdPersonPos;
     [SerializeField] private float lapFirstPersonPos;
-    [SerializeField] private Quaternion lapThirdPersonRotate;
-    [SerializeField] private Quaternion lapFirstPersonRotate;
+    [SerializeField] private Vector3 lapThirdPersonRotate;
+    [SerializeField] private Vector3 lapFirstPersonRotate;
 
     private void OnEnable()
     {
@@ -45,18 +45,19 @@ public class PlayerCameraController : MonoBehaviour
         }
     }
 
-    private void MoveCameraTo(float _moveTo, float _lapMoveTo, Quaternion _lapRotation)
+    private void MoveCameraTo(float _moveTo, float _lapMoveTo, Vector3 _lapRotation)
     {
         StopAllCoroutines();
         StartCoroutine(TweenMovement(_moveTo, _lapMoveTo, _lapRotation));
     }
 
-    private IEnumerator TweenMovement(float _moveToTween, float _lapMoveToTween, Quaternion _lapRotationTween)
+    private IEnumerator TweenMovement(float _moveToTween, float _lapMoveToTween, Vector3 _lapRotationTween)
     {
         DOTween.To(() => _cinemachinePositionComposer.CameraDistance, x => _cinemachinePositionComposer.CameraDistance = x, _moveToTween, TransitionTime);
 
-        _lookAtPoint.transform.DOMove(new Vector3(_lapMoveToTween, _lookAtPoint.transform.position.y, _lookAtPoint.transform.position.z), TransitionTime);
-        _lookAtPoint.transform.DORotateQuaternion(_lapRotationTween, TransitionTime);
+        //_lookAtPoint.transform.DOLocalMove(new Vector3(_lapMoveToTween, _lookAtPoint.transform.position.y, _lookAtPoint.transform.position.z), TransitionTime, true);
+        
+        _lookAtPoint.transform.DOLocalRotate(_lapRotationTween, TransitionTime);
 
         yield return null;
     }

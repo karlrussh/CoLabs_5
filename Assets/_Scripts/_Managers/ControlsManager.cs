@@ -29,6 +29,23 @@ public class ControlsManager : MonoBehaviour
         GameManager.OnGameStateChanged -= HandleGameStateChanged;
     }
 
+    private void HandleGameStateChanged(GameState state)
+    {
+        // Disables player input when needed
+        switch (state)
+        {
+            case GameState.Cutscene:
+                enabled = false;
+                break;
+            case GameState.Dialogue:
+                enabled = false;
+                break;
+            case GameState.GameStarted:
+                enabled = true;
+                break;   
+        }
+    }
+
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && !IsAiming && !IsReloading)
@@ -63,19 +80,6 @@ public class ControlsManager : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             OnPlayerJump?.Invoke();
-        }
-    }
-
-    private void HandleGameStateChanged(GameState state)
-    {
-        // Disables player input when in cutscene or dialogue
-        if (state == GameState.Cutscene || state == GameState.Dialogue)
-        {
-            enabled = false;
-        }
-        else
-        {
-            enabled = false;
         }
     }
 
