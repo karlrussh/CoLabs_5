@@ -49,8 +49,8 @@ Material:
     - _SOFT_SHADOWS: 1
     - _Strength: 0.55
     m_Colors:
-    - _BottomColor: {r: 1, g: 0.76886797, b: 0.76886797, a: 0}
-    - _TopColor: {r: 1, g: 0, b: 0, a: 0}
+    - _BottomColor: {r: 0.990566, g: 0.85506403, b: 0.85506403, a: 0}
+    - _TopColor: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &2717997374083802480
