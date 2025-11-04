@@ -41,13 +41,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BlackAmount: -0.74
+    - _BlackAmount: 0.7
     - _MAIN_LIGHT_SHADOWS: 1
     - _MAIN_LIGHT_SHADOW_CASCADE: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SOFT_SHADOWS: 1
-    - _Strength: 0.98
+    - _Strength: 2.33
     m_Colors:
     - _BottomColor: {r: 0.9339623, g: 0.14538093, b: 0.14538093, a: 0}
     - _TopColor: {r: 0, g: 0, b: 0, a: 0}
