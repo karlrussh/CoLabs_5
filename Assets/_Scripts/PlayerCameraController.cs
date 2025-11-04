@@ -8,6 +8,7 @@ public class PlayerCameraController : MonoBehaviour
     [Header("References")]
     [SerializeField] private CinemachinePositionComposer _cinemachinePositionComposer;
     [SerializeField] private GameObject _lookAtPoint;
+    [SerializeField] private GameObject _Nun;
 
     [Header("CameraSettings")]
     [SerializeField] private float ThirdPersonCamPos;
@@ -51,6 +52,12 @@ public class PlayerCameraController : MonoBehaviour
 
     private IEnumerator TweenMovement(float _moveToTween, float _targetOffsetXTween, Vector3 _lapRotationTween)
     {
+        if (_Nun.transform.localScale.x < 0)
+        {
+            _lapRotationTween = _lapRotationTween * -1f;
+            _targetOffsetXTween = _targetOffsetXTween * -1f;
+        }
+
         DOTween.To(() => _cinemachinePositionComposer.CameraDistance, x => _cinemachinePositionComposer.CameraDistance = x, _moveToTween, TransitionTime);
         
         _lookAtPoint.transform.DOLocalRotate(_lapRotationTween, TransitionTime);

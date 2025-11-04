@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     private float horizontal;
     private float speed = 4f;
     private float jumpingPower = 5f;
@@ -15,6 +17,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
 
     private bool _canMove;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void OnEnable()
     {
@@ -76,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
     }
 
-    private void Flip()
+    public void Flip()
     {
         if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f))
         {
