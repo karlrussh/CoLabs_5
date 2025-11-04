@@ -16,7 +16,7 @@ public class BlackBarController : MonoBehaviour
 
     [SerializeField] private float TopBarOffsetY;
 
-    [SerializeField] private float TransitionTime = 0.6f;
+    [SerializeField] private float TransitionTime;
 
     private void OnEnable()
     {
