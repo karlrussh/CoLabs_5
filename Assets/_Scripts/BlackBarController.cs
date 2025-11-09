@@ -49,8 +49,8 @@ public class BlackBarController : MonoBehaviour
 
     private IEnumerator TweenBlackBars(float _barPosTween)
     {
-        TopBar.DOMove(new Vector2(960f, TopBarOffsetY + _barPosTween), TransitionTime, true);
-        BottomBar.DOMove(new Vector2(960f, _barPosTween = _barPosTween * -1), TransitionTime, true);
+        TopBar.DOMove(new Vector2(Screen.width / 2f, TopBarOffsetY + _barPosTween), TransitionTime, true);
+        BottomBar.DOMove(new Vector2(Screen.width / 2f, _barPosTween = _barPosTween * -1), TransitionTime, true);
 
         yield return null;
     }
