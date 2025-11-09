@@ -53,9 +53,9 @@ public class ControlsManager : MonoBehaviour
         {
             if (AmmoManager.Instance.AmmoCount != 0f)
             {
-                OnShootRequested?.Invoke();
-                Debug.Log("Shoot normal");
                 AmmoManager.Instance.TakeAmmo(10f);
+                OnShootRequested?.Invoke();
+                Debug.Log("Shoot normal");        
             }
             else 
             {
