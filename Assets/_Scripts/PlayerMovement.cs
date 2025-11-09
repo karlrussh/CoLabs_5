@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     private float horizontal;
     private float slidingHorizontal;
 
@@ -17,14 +19,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    public static Action OnPlayerStopSliding;
+
     private bool _canMove;
     private bool _sliding;
     private float slideBoost = 2f;
+
+    private void Awake() => Instance = this;
 
     private void OnEnable()
     {
         ControlsManager.OnPlayerJump += PlayerJump;
         ControlsManager.OnPlayerSlide += PlayerSlide;
+
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChange;
     }
 
@@ -32,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ControlsManager.OnPlayerJump -= PlayerJump;
         ControlsManager.OnPlayerSlide -= PlayerSlide;
+
         PlayerManager.OnPlayerStateChanged -= HandlePlayerStateChange;
     }
 
@@ -104,6 +112,8 @@ public class PlayerMovement : MonoBehaviour
         Debug.Log("End slide");
         slideBoost = 2f;
         _sliding = false;
+
+        OnPlayerStopSliding?.Invoke();
     }
 
     private void CalcSlideBoost()

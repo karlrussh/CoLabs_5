@@ -16,6 +16,7 @@ public class ControlsManager : MonoBehaviour
     public static event Action OnAimStop;
 
     public static event Action OnPlayerJump;
+
     public static event Action OnPlayerSlide;
 
     void Awake() => Instance = this;
@@ -92,7 +93,7 @@ public class ControlsManager : MonoBehaviour
 
         if (Input.GetButtonDown("Slide"))
         {
-            Debug.Log("Slid");
+            Debug.Log("Player Sliding");
             OnPlayerSlide?.Invoke();
         }
     }
