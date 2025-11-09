@@ -51,9 +51,16 @@ public class ControlsManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !IsAiming && !IsReloading)
         {
-            OnShootRequested?.Invoke();
-
-            Debug.Log("Shoot normal");
+            if (AmmoManager.Instance.AmmoCount != 0f)
+            {
+                OnShootRequested?.Invoke();
+                Debug.Log("Shoot normal");
+                AmmoManager.Instance.TakeAmmo(10f);
+            }
+            else 
+            {
+                Debug.Log("No Ammo Left !!");
+            }  
         }
 
         if (Input.GetMouseButtonDown(0) && IsAiming && !IsReloading)
