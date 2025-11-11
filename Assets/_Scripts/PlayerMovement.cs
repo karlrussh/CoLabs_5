@@ -1,10 +1,15 @@
 using System;
+using System.Collections;
 using System.Linq;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance;
+
     private float horizontal;
+    private float slidingHorizontal;
+
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpingPower = 5f;
     private bool isFacingRight = true;
@@ -14,17 +19,27 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
 
+    public static Action OnPlayerStopSliding;
+
     private bool _canMove;
+    private bool _sliding;
+    private float slideBoost = 2f;
+
+    private void Awake() => Instance = this;
 
     private void OnEnable()
     {
         ControlsManager.OnPlayerJump += PlayerJump;
+        ControlsManager.OnPlayerSlide += PlayerSlide;
+
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChange;
     }
 
     private void OnDisable()
     {
         ControlsManager.OnPlayerJump -= PlayerJump;
+        ControlsManager.OnPlayerSlide -= PlayerSlide;
+
         PlayerManager.OnPlayerStateChanged -= HandlePlayerStateChange;
     }
 
@@ -65,6 +80,65 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
         }
     }
+    
+    private void PlayerSlide()
+    {
+        if (!IsGrounded() || _sliding) return;
+
+        StartCoroutine(SlidingMomentum());
+    }
+
+    private IEnumerator SlidingMomentum()
+    {
+        _sliding = true;
+        slidingHorizontal = (isFacingRight) ? 1f : -1f;
+        slideBoost = 2f;
+        Debug.Log("Start slide");
+
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("Slowing down");
+
+        while ((isFacingRight) ? rb.linearVelocity.x > 0f : rb.linearVelocity.x < 0f)
+        {
+            //Debug.Log(slideBoost);
+            //Debug.Log("Hori velocity: " + rb.linearVelocity.x);
+
+            yield return null;
+            //slideBoost -= 0.005f;
+            CalcSlideBoost();
+
+        }
+        //Debug.Log(rb.linearVelocity.x);
+        Debug.Log("End slide");
+        slideBoost = 2f;
+        _sliding = false;
+
+        OnPlayerStopSliding?.Invoke();
+    }
+
+    private void CalcSlideBoost()
+    {
+        //if (rb.linearVelocity.y < 0f) slideBoost += 0.005f;
+        //else if (rb.linearVelocity.y == 0f) slideBoost -= 0.005f;
+        //else slideBoost -= 0.01f;
+
+        switch (rb.linearVelocity.y)
+        {
+            case < 0f:
+                Debug.Log("downward terrain");
+                //slideBoost += 0.005f;
+                slideBoost = (slideBoost >= 2f) ? 2f : slideBoost += 0.005f;
+                break;
+            case 0f:
+                Debug.Log("neutral terrain");
+                slideBoost -= 0.005f;
+                break;
+            case > 0f:
+                Debug.Log("Upward terrain");
+                slideBoost -= 0.01f;
+                break;
+        }
+    }
 
     private bool IsGrounded()
     {
@@ -73,7 +147,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
+        if (!_sliding) rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
+        else rb.linearVelocity = new Vector3((slidingHorizontal * speed) * slideBoost, rb.linearVelocity.y);
     }
 
     private void Flip()
