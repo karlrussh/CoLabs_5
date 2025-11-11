@@ -12,6 +12,8 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private float speed = 4f;
     [SerializeField] private float jumpingPower = 5f;
+    [SerializeField] private PlayerAimAndShoot playerAimAndShoot;
+
     private bool isFacingRight = true;
     
     [SerializeField] SpriteRenderer sr;
@@ -31,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ControlsManager.OnPlayerJump += PlayerJump;
         ControlsManager.OnPlayerSlide += PlayerSlide;
-
+        ControlsManager.OnShootRequested += playerAimAndShoot.ShootNormal;
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChange;
     }
 
