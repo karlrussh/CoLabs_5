@@ -2,6 +2,7 @@ using UnityEngine;
 using DG.Tweening;
 using Unity.Cinemachine;
 using System.Collections;
+using System;
 
 public class PlayerCameraController : MonoBehaviour
 {
@@ -24,11 +25,17 @@ public class PlayerCameraController : MonoBehaviour
     private void OnEnable()
     {
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChanged;
+
+        ControlsManager.OnPlayerSlide += HandleOnPlayerSlide;
+        PlayerMovement.OnPlayerStopSliding += HandleOnPlayerStopSlide;
     }
 
     private void OnDisable()
     {
         PlayerManager.OnPlayerStateChanged -= HandlePlayerStateChanged;
+        
+        ControlsManager.OnPlayerSlide -= HandleOnPlayerSlide;
+        PlayerMovement.OnPlayerStopSliding -= HandleOnPlayerStopSlide;
     }
 
     private void HandlePlayerStateChanged(PlayerState state)
@@ -42,6 +49,16 @@ public class PlayerCameraController : MonoBehaviour
                 MoveCameraTo(FirstPersonCamPos, FirstPersonTargetOffsetX, lapFirstPersonRotate);
                 break;
         }
+    }
+
+    private void HandleOnPlayerSlide()
+    {
+        MoveCameraTo(FirstPersonCamPos, FirstPersonTargetOffsetX, lapFirstPersonRotate);
+    }
+
+    private void HandleOnPlayerStopSlide()
+    {
+        MoveCameraTo(ThirdPersonCamPos, ThirdPersonTargetOffsetX, lapThirdPersonRotate);
     }
 
     private void MoveCameraTo(float _moveTo, float _targetOffsetX, Vector3 _lapRotation)

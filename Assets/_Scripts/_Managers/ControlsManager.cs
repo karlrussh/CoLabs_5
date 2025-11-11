@@ -16,6 +16,7 @@ public class ControlsManager : MonoBehaviour
     public static event Action OnAimStop;
 
     public static event Action OnPlayerJump;
+
     public static event Action OnPlayerSlide;
 
     void Awake() => Instance = this;
@@ -51,9 +52,16 @@ public class ControlsManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !IsAiming && !IsReloading)
         {
-            OnShootRequested?.Invoke();
-
-            Debug.Log("Shoot normal");
+            if (AmmoManager.Instance.AmmoCount != 0f)
+            {
+                AmmoManager.Instance.TakeAmmo(10f);
+                OnShootRequested?.Invoke();
+                Debug.Log("Shoot normal");        
+            }
+            else 
+            {
+                Debug.Log("No Ammo Left !!");
+            }  
         }
 
         if (Input.GetMouseButtonDown(0) && IsAiming && !IsReloading)
@@ -85,7 +93,7 @@ public class ControlsManager : MonoBehaviour
 
         if (Input.GetButtonDown("Slide"))
         {
-            Debug.Log("Slid");
+            Debug.Log("Player Sliding");
             OnPlayerSlide?.Invoke();
         }
     }
