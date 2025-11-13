@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 public class ControlsManager : MonoBehaviour
 {
@@ -54,8 +55,9 @@ public class ControlsManager : MonoBehaviour
         {
             if (AmmoManager.Instance.AmmoCount != 0f)
             {
-                AmmoManager.Instance.TakeAmmo(10f);
-                OnShootRequested?.Invoke();
+                //AmmoManager.Instance.TakeAmmo(10f);
+                //OnShootRequested?.Invoke();
+                StartCoroutine(ShootContinuous());
                 Debug.Log("Shoot normal");        
             }
             else 
@@ -96,6 +98,27 @@ public class ControlsManager : MonoBehaviour
             Debug.Log("Player Sliding");
             OnPlayerSlide?.Invoke();
         }
+    }
+
+    private IEnumerator ShootContinuous()
+    {
+        while (Input.GetMouseButton(0))
+        {
+            if (!IsAiming)
+            {
+                if (AmmoManager.Instance.AmmoCount != 0f)
+                {
+                    AmmoManager.Instance.TakeAmmo(10f);
+                    Debug.Log(AmmoManager.Instance.AmmoCount);
+                    OnShootRequested?.Invoke();
+                }
+            }
+            else Debug.Log("NotGonnaHappen");
+
+            yield return new WaitForSeconds(0.2f);
+
+        }
+        Debug.Log("Stop shooting");
     }
 
     public void SetReloading(bool reloading)
