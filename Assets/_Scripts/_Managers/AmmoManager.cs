@@ -7,10 +7,14 @@ public class AmmoManager : MonoBehaviour
     public float AmmoCount { get; private set; }
     [SerializeField] public float MaxAmmo { get; private set; } = 100f;
 
+    public float CleanseAmmoCount { get; private set; }
+    [SerializeField] public float CleanseMaxAmmo { get; private set; } = 3f;
+
     private void Awake() 
     {
         Instance = this;
         AmmoCount = MaxAmmo;
+        CleanseAmmoCount = CleanseMaxAmmo;
     }
 
     public void TakeAmmo(float ammo)
@@ -25,7 +29,7 @@ public class AmmoManager : MonoBehaviour
     }
 
     public void AddAmmo(float ammo)
-    { 
+    {
         AmmoCount += ammo;
         if (AmmoCount >= MaxAmmo)
         {
@@ -33,5 +37,23 @@ public class AmmoManager : MonoBehaviour
         }
 
         Debug.Log($"Ammo: {AmmoCount}");
+    }
+
+    public void CleanseAddAmmo(float ammo)
+    {
+        CleanseAmmoCount += ammo;
+        if (CleanseAmmoCount >= CleanseMaxAmmo)
+        {
+            CleanseAmmoCount = CleanseMaxAmmo;
+        }
+    }
+
+    public void CleanseTakeAmmo(float ammo)
+    {
+        CleanseAmmoCount -= ammo;
+        if (CleanseAmmoCount <= 0f)
+        {
+            CleanseAmmoCount = 0f;
+        }
     }
 }

@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isFacingRight = true;
     
-    [SerializeField] SpriteRenderer sr;
+    [SerializeField] GameObject sr;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
