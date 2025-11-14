@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         ControlsManager.OnPlayerSlide += PlayerSlide;
         ControlsManager.OnShootRequested += playerAimAndShoot.ShootNormal;
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChange;
+        
     }
 
     private void OnDisable()
@@ -159,6 +160,8 @@ public class PlayerMovement : MonoBehaviour
         {
             // Debug.Log("FLIPPING");
             isFacingRight = !isFacingRight;
+
+            playerAimAndShoot.facingRight = isFacingRight;
             //Vector3 localScale = transform.localScale;
             //localScale.x *= -1f;
             //transform.localScale = localScale;

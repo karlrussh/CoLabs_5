@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class NormalBulletBehaviour : MonoBehaviour
@@ -10,6 +11,8 @@ public class NormalBulletBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         SetStraightVelocity();
+
+        StartCoroutine(BulletLifespan());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -24,6 +27,13 @@ public class NormalBulletBehaviour : MonoBehaviour
     private void SetStraightVelocity()
     {
         rb.linearVelocity = transform.right * bulletSpeed;
+    }
+
+    private IEnumerator BulletLifespan()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Destroy(gameObject);
     }
 
 }

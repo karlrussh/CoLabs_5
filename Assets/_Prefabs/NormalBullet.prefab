@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a28b1b752d0ec4486a439f8d8dd387, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 5
+  bulletSpeed: 8
   WhatDestroysBullet:
     serializedVersion: 2
     m_Bits: 64
