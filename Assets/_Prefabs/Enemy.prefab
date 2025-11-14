@@ -159,7 +159,7 @@ MonoBehaviour:
   target: {fileID: 0}
   rb: {fileID: 173305054027655061}
   numDemons: 2
-  typeOfDemons: {fileID: 9018481782187807359}
+  typeOfDemons: {fileID: 9018481782187807359, guid: 4ece17b932a4ce9439a4f4d3d7c12a90, type: 3}
   rangeOfSight: 10
   attackDistance: 3
   HP: 100
