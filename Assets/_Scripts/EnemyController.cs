@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
     [SerializeField] private GameObject target;
     [SerializeField] private Rigidbody rb;
     [SerializeField] private int numDemons;
@@ -13,7 +12,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float HP, Speed;
     private bool targetFound;
     private Vector3 spawnPos;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

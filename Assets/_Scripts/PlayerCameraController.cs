@@ -22,6 +22,8 @@ public class PlayerCameraController : MonoBehaviour
     [SerializeField] private Vector3 lapThirdPersonRotate;
     [SerializeField] private Vector3 lapFirstPersonRotate;
 
+    private bool _isSliding = false;
+
     private void OnEnable()
     {
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChanged;
@@ -43,9 +45,12 @@ public class PlayerCameraController : MonoBehaviour
         switch (state)
         {
             case PlayerState.InThirdPerson:
+                if (_isSliding) break;
                 MoveCameraTo(ThirdPersonCamPos, ThirdPersonTargetOffsetX, lapThirdPersonRotate);
                 break;
+
             case PlayerState.InFirstPerson:
+                if (_isSliding) break;
                 MoveCameraTo(FirstPersonCamPos, FirstPersonTargetOffsetX, lapFirstPersonRotate);
                 break;
         }
@@ -53,11 +58,13 @@ public class PlayerCameraController : MonoBehaviour
 
     private void HandleOnPlayerSlide()
     {
+        _isSliding = true;
         MoveCameraTo(FirstPersonCamPos, FirstPersonTargetOffsetX, lapFirstPersonRotate);
     }
 
     private void HandleOnPlayerStopSlide()
     {
+        _isSliding = false;
         MoveCameraTo(ThirdPersonCamPos, ThirdPersonTargetOffsetX, lapThirdPersonRotate);
     }
 

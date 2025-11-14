@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum GameState
 {
@@ -81,6 +82,9 @@ public class GameManager : MonoBehaviour
     private void HandleGameStarted()
     {
         PlayerManager.Instance.UpdatePlayerState(PlayerState.InThirdPerson);
+        
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     private void HandleDialogue()

@@ -68,9 +68,16 @@ public class ControlsManager : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && IsAiming && !IsReloading)
         {
-            OnCleanseShootRequested?.Invoke();
-
-            Debug.Log("Shoot cleanse");
+            if (AmmoManager.Instance.CleanseAmmoCount != 0f)
+            {
+                AmmoManager.Instance.CleanseTakeAmmo(1f);
+                OnCleanseShootRequested?.Invoke();
+                Debug.Log("Shoot cleanse");
+            }
+            else
+            {
+                Debug.Log("No Cleanse Ammo Left !!");
+            }            
         }
 
         if (Input.GetMouseButtonDown(1) && !IsReloading)
@@ -121,12 +128,13 @@ public class ControlsManager : MonoBehaviour
         Debug.Log("Stop shooting");
     }
 
-    public void SetReloading(bool reloading)
+
+    private void SetReloading(bool reloading)
     {
         IsReloading = reloading;
     }
 
-    public void SetAim(bool aiming)
+    private void SetAim(bool aiming)
     {
         IsAiming = aiming;
     }
