@@ -13,6 +13,7 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] private AudioSource PhoneAudio;
     private AudioClip phoneAudioClip;
     [SerializeField] private Animator hinge;
+    [SerializeField] private PhoneSO call;
 
     private float startTime, journeyLength;
     private float speed = 200;
@@ -63,5 +64,18 @@ public class PhoneScript : MonoBehaviour
             float fractionOfJourney = distCovered / journeyLength;
             Phone.transform.position = Vector3.Lerp(endPos.transform.position, startPos.transform.position, fractionOfJourney);
         }
+        if (Input.GetKeyDown("1"))
+        {
+            PhoneCall(call);
+        }
+        if (Input.GetKeyDown("2"))
+        {
+            AcceptCall();
+        }
+        if (Input.GetKeyDown("3"))
+        {
+            EndPhoneCall();
+        }
+
     }
 }
