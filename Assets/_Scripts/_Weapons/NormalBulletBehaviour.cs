@@ -15,12 +15,18 @@ public class NormalBulletBehaviour : MonoBehaviour
         StartCoroutine(BulletLifespan());
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision other)
     {
-        if ((WhatDestroysBullet.value & other.gameObject.layer) > 0)
+        //if ((WhatDestroysBullet.value & other.gameObject.layer) > 0)
+        //{
+        //    Debug.Log("destroyed");
+        //    Destroy(gameObject);
+        //}
+
+        if (other.gameObject.GetComponent<EnemyController>())
         {
-            Debug.Log("destroyed");
-            Destroy(gameObject);
+            other.gameObject.GetComponent<EnemyController>().die();
+            //Destroy(other.gameObject);
         }
     }
 
