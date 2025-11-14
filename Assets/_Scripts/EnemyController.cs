@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    private void die()
+    public void die()
     {
         if(numDemons <= 0)
         {

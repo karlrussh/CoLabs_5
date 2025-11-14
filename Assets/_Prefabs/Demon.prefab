@@ -158,7 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   rb: {fileID: 173305054027655061}
-  numDemons: 2
+  numDemons: 0
   typeOfDemons: {fileID: 9018481782187807359}
   rangeOfSight: 10
   attackDistance: 3
