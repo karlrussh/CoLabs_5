@@ -4,28 +4,17 @@ using UnityEngine;
 public class FinisherGunController : MonoBehaviour
 {
     [SerializeField] private GameObject _handStartPos;
-    private bool _isAiming = false;
     private float _maxDistance = 100f;
 
     private void OnEnable()
     {
-        ControlsManager.OnAimStart += HandleAimStart;
-        ControlsManager.OnAimStop += HandleAimStop;
-
         ControlsManager.OnCleanseShootRequested += HandleCleanseShootRequested;
     }
 
     private void OnDisable()
     {
-        ControlsManager.OnAimStart -= HandleAimStart;
-        ControlsManager.OnAimStop -= HandleAimStop;
-
         ControlsManager.OnCleanseShootRequested -= HandleCleanseShootRequested;
     }
-
-    private void HandleAimStart() => _isAiming = true;
-
-    private void HandleAimStop() => _isAiming = false;
 
     private void HandleCleanseShootRequested()
     {

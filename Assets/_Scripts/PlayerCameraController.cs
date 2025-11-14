@@ -48,6 +48,7 @@ public class PlayerCameraController : MonoBehaviour
                 if (_isSliding) break;
                 MoveCameraTo(ThirdPersonCamPos, ThirdPersonTargetOffsetX, lapThirdPersonRotate);
                 break;
+
             case PlayerState.InFirstPerson:
                 if (_isSliding) break;
                 MoveCameraTo(FirstPersonCamPos, FirstPersonTargetOffsetX, lapFirstPersonRotate);

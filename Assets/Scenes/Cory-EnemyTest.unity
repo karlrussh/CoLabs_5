@@ -6307,30 +6307,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 631421637425433806, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
-      propertyPath: m_Dithering
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 631421637425433806, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
-      propertyPath: m_RenderShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
-      propertyPath: m_ClearFlags
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6339138960056244399, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
       propertyPath: m_LocalPosition.x
       value: -29.51
@@ -8398,25 +8374,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3492711823158940503, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
-      propertyPath: _normalCrosshairVerticalHeight
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 3492711823158940503, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
-      propertyPath: _normalCrosshairHorizontalHeight
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 6467634566673044031, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
       propertyPath: m_Name
       value: PlayerHUDCanvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 6888187617868634666, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6944359201424169236, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8587140841481281339, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
       propertyPath: m_AnchorMax.x
@@ -8483,10 +8443,6 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 534475953}
-    - target: {fileID: 8496521146488120535, guid: deb5c6d2e758778409acd9ef55bd8e8b, type: 3}
-      propertyPath: typeOfDemons
-      value: 
-      objectReference: {fileID: 9018481782187807359, guid: 4ece17b932a4ce9439a4f4d3d7c12a90, type: 3}
     - target: {fileID: 9018481782187807359, guid: deb5c6d2e758778409acd9ef55bd8e8b, type: 3}
       propertyPath: m_Name
       value: Enemy
