@@ -11,6 +11,7 @@ public class ControlsManager : MonoBehaviour
     public bool IsAiming { get; private set; }
 
     public static event Action OnShootRequested;
+    public static event Action OnShootStopped;
     public static event Action OnCleanseShootRequested;
 
     public static event Action OnAimStart;
@@ -51,19 +52,22 @@ public class ControlsManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !IsAiming && !IsReloading)
+        if (Input.GetMouseButton(0) && !IsAiming && !IsReloading)
         {
             if (AmmoManager.Instance.AmmoCount != 0f)
             {
-                //AmmoManager.Instance.TakeAmmo(10f);
-                //OnShootRequested?.Invoke();
-                StartCoroutine(ShootContinuous());
+                AmmoManager.Instance.TakeAmmo(1f);
+                OnShootRequested?.Invoke();
                 Debug.Log("Shoot normal");        
             }
             else 
             {
                 Debug.Log("No Ammo Left !!");
             }  
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            OnShootStopped?.Invoke();   
         }
 
         if (Input.GetMouseButtonDown(0) && IsAiming && !IsReloading)
@@ -106,28 +110,6 @@ public class ControlsManager : MonoBehaviour
             OnPlayerSlide?.Invoke();
         }
     }
-
-    private IEnumerator ShootContinuous()
-    {
-        while (Input.GetMouseButton(0))
-        {
-            if (!IsAiming)
-            {
-                if (AmmoManager.Instance.AmmoCount != 0f)
-                {
-                    AmmoManager.Instance.TakeAmmo(10f);
-                    Debug.Log(AmmoManager.Instance.AmmoCount);
-                    OnShootRequested?.Invoke();
-                }
-            }
-            else Debug.Log("NotGonnaHappen");
-
-            yield return new WaitForSeconds(0.2f);
-
-        }
-        Debug.Log("Stop shooting");
-    }
-
 
     private void SetReloading(bool reloading)
     {
