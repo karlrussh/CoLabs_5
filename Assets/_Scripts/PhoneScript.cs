@@ -14,11 +14,13 @@ public class PhoneScript : MonoBehaviour
     private AudioClip phoneAudioClip;
     [SerializeField] private Animator hinge;
     [SerializeField] private PhoneSO call;
+    [SerializeField] private SubtitleManager subtitles;
 
     private float startTime, journeyLength;
     private float speed = 200;
     public void PhoneCall(PhoneSO phoneData)
     {
+        subtitles.SetText(phoneData.subtitleFile);
         MoveDown = false;
         moveUp = true;
         startTime = Time.time;
@@ -35,6 +37,7 @@ public class PhoneScript : MonoBehaviour
     {
         PhoneAudio.clip = phoneAudioClip;
         PhoneAudio.Play();
+        subtitles.StartDialogue();
         hinge.SetBool("Bobbing", true);
     }
 
@@ -72,10 +75,5 @@ public class PhoneScript : MonoBehaviour
         {
             AcceptCall();
         }
-        if (Input.GetKeyDown("3"))
-        {
-            EndPhoneCall();
-        }
-
     }
 }

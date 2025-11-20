@@ -7906,12 +7906,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5254711670952346805, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -171.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7747418794240527602, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
       propertyPath: m_Name
       value: PhoneUI
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 377100342688119366, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
