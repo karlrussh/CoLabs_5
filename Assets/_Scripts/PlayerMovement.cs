@@ -26,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
     private bool _canMove;
     private bool _sliding;
     private float slideBoost = 2f;
+    
+    private bool _flipped = false; // has the player flipped in the last 0.3 seconds
+    private bool _BfRunning = false; // Backflipwindow coroutine is running
+    private float backflipWindowTimer = 1f;
+    //private Coroutine test;
 
     private void Awake() => Instance = this;
 
@@ -66,13 +71,20 @@ public class PlayerMovement : MonoBehaviour
         {
             horizontal = Input.GetAxisRaw("Horizontal");
         }
-
+        
         Flip();
+
+        if (_flipped)
+        {
+            if (!_BfRunning) StopCoroutine(BackflipWindow());
+            StartCoroutine(BackflipWindow());
+        }
     }
 
     private void PlayerJump()
     {
         if (!IsGrounded()) return;
+
 
         if (rb.linearVelocity.y > 0f)
         {
@@ -158,7 +170,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f))
         {
-            // Debug.Log("FLIPPING");
+            
+
+
             isFacingRight = !isFacingRight;
 
             playerAimAndShoot.facingRight = isFacingRight;
@@ -170,6 +184,18 @@ public class PlayerMovement : MonoBehaviour
             spriteScale.x *= -1f;
             sr.transform.localScale = spriteScale;
             //sr.flipX;
+
+            _flipped = true;
         }
+    }
+
+    private IEnumerator BackflipWindow()
+    {
+        Debug.Log("Backflip on");
+        _BfRunning = true;
+        yield return new WaitForSeconds(backflipWindowTimer);
+        Debug.Log("Backflip off");
+        _BfRunning = false;
+        _flipped = false;
     }
 }
