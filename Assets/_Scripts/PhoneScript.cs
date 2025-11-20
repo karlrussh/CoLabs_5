@@ -75,10 +75,5 @@ public class PhoneScript : MonoBehaviour
         {
             AcceptCall();
         }
-        if (Input.GetKeyDown("3"))
-        {
-            EndPhoneCall();
-        }
-
     }
 }
