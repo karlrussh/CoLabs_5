@@ -52,13 +52,12 @@ public class ControlsManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && !IsAiming && !IsReloading)
+        if (Input.GetMouseButtonDown(0) && !IsAiming && !IsReloading)
         {
-            if (AmmoManager.Instance.AmmoCount != 0f)
+            if (AmmoManager.Instance.AmmoCount > 0f)
             {
-                AmmoManager.Instance.TakeAmmo(1f);
                 OnShootRequested?.Invoke();
-                Debug.Log("Shoot normal");        
+                //Debug.Log("Shoot normal");        
             }
             else 
             {
@@ -109,11 +108,6 @@ public class ControlsManager : MonoBehaviour
             Debug.Log("Player Sliding");
             OnPlayerSlide?.Invoke();
         }
-    }
-
-    private void SetReloading(bool reloading)
-    {
-        IsReloading = reloading;
     }
 
     private void SetAim(bool aiming)
