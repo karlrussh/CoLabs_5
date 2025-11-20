@@ -15,6 +15,8 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] private Animator hinge;
     [SerializeField] private PhoneSO call;
     [SerializeField] private SubtitleManager subtitles;
+    [SerializeField] private GameManager manager;
+    private GameState beforeDialogue;
 
     private float startTime, journeyLength;
     private float speed = 200;
@@ -37,18 +39,17 @@ public class PhoneScript : MonoBehaviour
     {
         PhoneAudio.clip = phoneAudioClip;
         PhoneAudio.Play();
+        beforeDialogue = manager.State;
+        manager.State = GameState.Dialogue;
         subtitles.StartDialogue();
         hinge.SetBool("Bobbing", true);
     }
-
-
-
-
     public void EndPhoneCall()
     {
         moveUp = false;
         MoveDown = true;
         startTime = Time.time;
+        manager.State = beforeDialogue;
         PhoneAudio.Stop();
         hinge.SetBool("Bobbing", false);
     }
@@ -75,5 +76,10 @@ public class PhoneScript : MonoBehaviour
         {
             AcceptCall();
         }
+    }
+
+    private void Start()
+    {
+        manager = FindAnyObjectByType<GameManager>();
     }
 }
