@@ -4,6 +4,7 @@ using UnityEngine;
 public class WaterGunController : MonoBehaviour
 {
     [SerializeField] ParticleSystem _waterParticles;
+    [SerializeField] ParticleSystem _waterSplashParticles;
     [SerializeField] Transform _startPos;
 
     [SerializeField] Camera _mainCamera;
@@ -30,17 +31,18 @@ public class WaterGunController : MonoBehaviour
     void Update()
     {
         _waterParticles.transform.position = _startPos.position;
-
-        AimAtMouse();
+        _waterSplashParticles.transform.position = _startPos.position;
 
         if (_isShooting)
         {
             AmmoManager.Instance.TakeAmmo(_bulletsPerShot);
+            AimAtMouse();
         }
 
         if (AmmoManager.Instance.AmmoCount == 0f)
         { 
             _waterParticles.Stop();
+            _waterSplashParticles.Stop();
         }
     }
 
@@ -64,6 +66,7 @@ public class WaterGunController : MonoBehaviour
     private void HandleShootRequested()
     {
         _waterParticles.Play();
+        //_waterSplashParticles.Play();
 
         _isShooting = true;
     }
@@ -71,6 +74,7 @@ public class WaterGunController : MonoBehaviour
     private void HandleShootStopped()
     {
         _waterParticles.Stop();
+        //_waterSplashParticles.Stop();
 
         _isShooting = false;
     }
