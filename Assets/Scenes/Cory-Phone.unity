@@ -7826,6 +7826,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 531821370296729336, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 531821370296729336, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 531821370296729336, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 891900693254694829, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 719.69995
+      objectReference: {fileID: 0}
+    - target: {fileID: 891900693254694829, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 891900693254694829, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -281.85004
+      objectReference: {fileID: 0}
+    - target: {fileID: 891900693254694829, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -65
+      objectReference: {fileID: 0}
     - target: {fileID: 1527140412991968877, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -7906,6 +7934,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1804533776042944134, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6456169201439128279, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+      propertyPath: phone
+      value: 
+      objectReference: {fileID: 1900302972}
     - target: {fileID: 7747418794240527602, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
       propertyPath: m_Name
       value: PhoneUI
@@ -8080,6 +8116,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 776bb47a3f719be4fa47997f068e7945, type: 3}
+--- !u!114 &1900302972 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7923480101548346719, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
+  m_PrefabInstance: {fileID: 1870947228}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd7765f10e2c05438f541077c5793c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1964329446
 GameObject:
   m_ObjectHideFlags: 0

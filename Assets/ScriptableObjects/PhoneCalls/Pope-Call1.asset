@@ -17,3 +17,4 @@ MonoBehaviour:
   <callerPfpTop>k__BackingField: {fileID: -1219721923, guid: dbde7fc8c70cc934a9e8ca438112b2c5, type: 3}
   <callerPfpBottom>k__BackingField: {fileID: 1535179668, guid: dbde7fc8c70cc934a9e8ca438112b2c5, type: 3}
   <ringTone>k__BackingField: {fileID: 8300000, guid: 28e23807b5e1601449e64e0f2482bf25, type: 3}
+  <subtitleFile>k__BackingField: {fileID: 4900000, guid: bf1f87ef69910834bb4d71c3ff222dd9, type: 3}
