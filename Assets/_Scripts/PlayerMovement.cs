@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ControlsManager.OnPlayerJump += PlayerJump;
         ControlsManager.OnPlayerSlide += PlayerSlide;
-        ControlsManager.OnShootRequested += playerAimAndShoot.ShootNormal;
+        //ControlsManager.OnShootRequested += playerAimAndShoot.ShootNormal;
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChange;
         
     }
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
             horizontal = Input.GetAxisRaw("Horizontal");
         }
 
-        Flip();
+        Flip(); 
     }
 
     private void PlayerJump()
@@ -156,12 +156,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Flip()
     {
-        if ((isFacingRight && horizontal < 0f || !isFacingRight && horizontal > 0f))
+        Vector3 playerScreenPos = Camera.main.WorldToScreenPoint(transform.position);
+        float flipDir = (Input.mousePosition.x > playerScreenPos.x) ? 1f : -1f;
+
+        if ((isFacingRight && flipDir < 0f || !isFacingRight && flipDir > 0f))
         {
             // Debug.Log("FLIPPING");
             isFacingRight = !isFacingRight;
 
-            playerAimAndShoot.facingRight = isFacingRight;
+            //playerAimAndShoot.facingRight = isFacingRight;
             //Vector3 localScale = transform.localScale;
             //localScale.x *= -1f;
             //transform.localScale = localScale;
