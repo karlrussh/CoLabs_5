@@ -5,15 +5,18 @@ using UnityEngine.UI;
 public class AmmoBarManager : MonoBehaviour
 {
     [SerializeField] Slider _AmmoSlider;
+    private bool _isShooting = false;
 
     private void OnEnable()
     {
         ControlsManager.OnShootRequested += HandleShootRequested;
+        ControlsManager.OnShootStopped += HandleShootStopped;
     }
 
     private void OnDisable()
     {
         ControlsManager.OnShootRequested -= HandleShootRequested;
+        ControlsManager.OnShootStopped -= HandleShootStopped;
     }
 
     private void Start()
@@ -27,8 +30,19 @@ public class AmmoBarManager : MonoBehaviour
         _AmmoSlider.value = AmmoManager.Instance.AmmoCount;
     }
 
+    private void Update()
+    {
+        if(_isShooting)
+            _AmmoSlider.value = AmmoManager.Instance.AmmoCount;
+    }
+
     private void HandleShootRequested()
     {
-        _AmmoSlider.value = AmmoManager.Instance.AmmoCount;
+        _isShooting = true;
+    }
+
+    private void HandleShootStopped()
+    {
+        _isShooting = false;
     }
 }

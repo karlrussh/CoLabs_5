@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,5 +11,5 @@ public class PhoneSO : ScriptableObject
     [field: SerializeField] public Sprite callerPfpTop { get; private set; }
     [field: SerializeField] public Sprite callerPfpBottom { get; private set; }
     [field: SerializeField] public AudioClip ringTone { get; private set; }
-
+    [field: SerializeField] public TextAsset subtitleFile { get; private set; }
 }
