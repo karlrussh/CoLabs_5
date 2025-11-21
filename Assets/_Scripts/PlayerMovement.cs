@@ -26,6 +26,15 @@ public class PlayerMovement : MonoBehaviour
     private bool _canMove;
     private bool _sliding;
     private float slideBoost = 2f;
+    
+    private bool _flipped = false; // has the player flipped in the last 0.3 seconds
+    private bool _BfRunning = false; // Backflipwindow coroutine is running
+    private float backflipWindowTimer = 0.2f;
+    private IEnumerator BFCoroutine;
+    private float BackflipRotationSpeed = 200f;
+
+
+    //private Coroutine test;
 
     private void Awake() => Instance = this;
 
@@ -62,18 +71,30 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        
+
         if (_canMove)
         {
             horizontal = Input.GetAxisRaw("Horizontal");
         }
 
-        Flip(); 
+        
+        Flip();
+
+        if (_flipped)
+        {
+            //BFCoroutine = BackflipWindow();
+            if (_BfRunning) { /*Debug.Log("Stopping Coroutine"); */StopCoroutine(BFCoroutine); }
+            BFCoroutine = BackflipWindow();
+            StartCoroutine(BFCoroutine);
+        }
     }
 
     private void PlayerJump()
     {
         if (!IsGrounded()) return;
 
+        
         if (rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -86,6 +107,13 @@ public class PlayerMovement : MonoBehaviour
     
     private void PlayerSlide()
     {
+        if (_BfRunning)
+        {
+            //Debug.Log("Backflip");
+            StartCoroutine(BackflipRotation());
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower * 2);
+            return;
+        }
         if (!IsGrounded() || _sliding) return;
 
         StartCoroutine(SlidingMomentum());
@@ -96,10 +124,10 @@ public class PlayerMovement : MonoBehaviour
         _sliding = true;
         slidingHorizontal = (isFacingRight) ? 1f : -1f;
         slideBoost = 2f;
-        Debug.Log("Start slide");
+        //Debug.Log("Start slide");
 
         yield return new WaitForSeconds(0.5f);
-        Debug.Log("Slowing down");
+        // Debug.Log("Slowing down");
 
         while ((isFacingRight) ? rb.linearVelocity.x > 0f : rb.linearVelocity.x < 0f)
         {
@@ -112,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         }
         //Debug.Log(rb.linearVelocity.x);
-        Debug.Log("End slide");
+        //Debug.Log("End slide");
         slideBoost = 2f;
         _sliding = false;
 
@@ -128,16 +156,16 @@ public class PlayerMovement : MonoBehaviour
         switch (rb.linearVelocity.y)
         {
             case < 0f:
-                Debug.Log("downward terrain");
+                //Debug.Log("downward terrain");
                 //slideBoost += 0.005f;
                 slideBoost = (slideBoost >= 2f) ? 2f : slideBoost += 0.005f;
                 break;
             case 0f:
-                Debug.Log("neutral terrain");
+                //Debug.Log("neutral terrain");
                 slideBoost -= 0.005f;
                 break;
             case > 0f:
-                Debug.Log("Upward terrain");
+                //Debug.Log("Upward terrain");
                 slideBoost -= 0.01f;
                 break;
         }
@@ -161,7 +189,9 @@ public class PlayerMovement : MonoBehaviour
 
         if ((isFacingRight && flipDir < 0f || !isFacingRight && flipDir > 0f))
         {
-            // Debug.Log("FLIPPING");
+            
+
+
             isFacingRight = !isFacingRight;
 
             //playerAimAndShoot.facingRight = isFacingRight;
@@ -173,6 +203,37 @@ public class PlayerMovement : MonoBehaviour
             spriteScale.x *= -1f;
             sr.transform.localScale = spriteScale;
             //sr.flipX;
+
+            _flipped = true;
         }
+    }
+
+    private IEnumerator BackflipWindow()
+    {
+        _flipped = false;
+
+        //Debug.Log("Backflip on");
+        _BfRunning = true;
+        yield return new WaitForSeconds(backflipWindowTimer);
+        //Debug.Log("Backflip off");
+        _BfRunning = false;
+        //_flipped = false;
+    }
+
+    private IEnumerator BackflipRotation()
+    {
+        float flippedRotationSpeed = isFacingRight ? BackflipRotationSpeed : BackflipRotationSpeed*-1;
+        yield return new WaitForSeconds(0.2f);
+        Debug.Log("Start rotation");
+
+        while (!IsGrounded())
+        {
+            sr.transform.Rotate(Vector3.forward * flippedRotationSpeed * Time.deltaTime);
+            yield return null;
+        }
+        
+        OnPlayerStopSliding?.Invoke();
+        sr.transform.rotation = Quaternion.identity;
+        Debug.Log("End rotation");
     }
 }
