@@ -81,12 +81,18 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetTrigger("Default");
                 break;
             case MovementState.Sliding:
-                Debug.Log("Sliding animation");
+                //Debug.Log("Sliding animation");
                 animator.SetTrigger("Slide");
                 break;
-            case MovementState.Lunging:
-                Debug.Log("Jumping animation");
+            case MovementState.Jumping:
                 animator.SetTrigger("Jump");
+                break;
+            case MovementState.Lunging:
+                //Debug.Log("Jumping animation");
+                animator.SetTrigger("Jump");
+                break;
+            case MovementState.Backflip:
+                animator.SetTrigger("Backflip");
                 break;
         }
     }
@@ -102,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
         {
             
             horizontal = Input.GetAxisRaw("Horizontal");
+            animator.SetInteger("Horizontal", (int)horizontal);
         }
 
         animator.SetBool("Grounded", IsGrounded());
@@ -128,7 +135,7 @@ public class PlayerMovement : MonoBehaviour
             //_sliding = false;
 
             OnPlayerStopSliding?.Invoke();
-            Debug.Log("Lunging");
+            // Debug.Log("Lunging");
             movementState = MovementState.Lunging;
             HandleMovementStateAnimator(MovementState.Lunging);
             PlayerLunge();
@@ -136,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         }
         //movementState = MovementState.Lunging;
         HandleMovementStateAnimator(MovementState.Lunging);// Hard coded until we have a lunge animation no need to add unneccessary enums for edge cases
-        Debug.Log("Should be jumping");
+        
         if (rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -154,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //Debug.Log("Backflip");
             StartCoroutine(BackflipRotation());
+            HandleMovementStateAnimator(MovementState.Backflip);
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower * 2);
             return;
         }
@@ -257,6 +265,7 @@ public class PlayerMovement : MonoBehaviour
             case MovementState.Lunging:
                 
                 break;
+
         }
         
             // if (movementState != MovementState.Sliding) rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
@@ -306,7 +315,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float flippedRotationSpeed = isFacingRight ? BackflipRotationSpeed : BackflipRotationSpeed*-1;
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("Start rotation");
+        // Debug.Log("Start rotation");
 
         while (!IsGrounded())
         {
@@ -316,7 +325,7 @@ public class PlayerMovement : MonoBehaviour
         
         OnPlayerStopSliding?.Invoke();
         sr.transform.rotation = Quaternion.identity;
-        Debug.Log("End rotation");
+        // Debug.Log("End rotation");
     }
 
 }
@@ -325,6 +334,7 @@ public enum MovementState
 {
     Default,
     Sliding,
-    Jumping,
-    Lunging
+    Jumping, // ANIMATION ONLY, would break movement
+    Lunging, // Uses the animation of jumping, alters movement
+    Backflip // ANIMATION ONLY, would break movement
 }
