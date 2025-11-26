@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
     
     private void PlayerSlide()
     {
-        if (_BfRunning)
+        if (_BfRunning && IsGrounded())
         {
             //Debug.Log("Backflip");
             StartCoroutine(BackflipRotation());
