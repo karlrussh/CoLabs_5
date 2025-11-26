@@ -78,13 +78,15 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case MovementState.Default:
-                Debug.Log("Reset to default");
+                animator.SetTrigger("Default");
                 break;
             case MovementState.Sliding:
                 Debug.Log("Sliding animation");
+                animator.SetTrigger("Slide");
                 break;
-            case MovementState.Jumping:
+            case MovementState.Lunging:
                 Debug.Log("Jumping animation");
+                animator.SetTrigger("Jump");
                 break;
         }
     }
@@ -102,7 +104,8 @@ public class PlayerMovement : MonoBehaviour
             horizontal = Input.GetAxisRaw("Horizontal");
         }
 
-        
+        animator.SetBool("Grounded", IsGrounded());
+
         FlipSprite();
 
         if (_flipped)
@@ -126,9 +129,13 @@ public class PlayerMovement : MonoBehaviour
 
             OnPlayerStopSliding?.Invoke();
             Debug.Log("Lunging");
+            movementState = MovementState.Lunging;
+            HandleMovementStateAnimator(MovementState.Lunging);
             PlayerLunge();
             return;
         }
+        //movementState = MovementState.Lunging;
+        HandleMovementStateAnimator(MovementState.Lunging);// Hard coded until we have a lunge animation no need to add unneccessary enums for edge cases
         Debug.Log("Should be jumping");
         if (rb.linearVelocity.y > 0f)
         {
@@ -167,8 +174,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Lunging()
     {
         // _lunging = true;
-        movementState = MovementState.Jumping;
-        HandleMovementStateAnimator(movementState);
+        
         yield return new WaitForSeconds(0.2f);
         while (!IsGrounded())
         {
@@ -248,8 +254,8 @@ public class PlayerMovement : MonoBehaviour
             case MovementState.Sliding:
                 rb.linearVelocity = new Vector3((slidingHorizontal * speed) * slideBoost, rb.linearVelocity.y);
                 break;
-            case MovementState.Jumping:
-                Debug.Log("loonge");
+            case MovementState.Lunging:
+                
                 break;
         }
         
@@ -319,5 +325,6 @@ public enum MovementState
 {
     Default,
     Sliding,
-    Jumping
+    Jumping,
+    Lunging
 }
