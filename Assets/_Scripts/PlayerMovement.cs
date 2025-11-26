@@ -78,13 +78,21 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case MovementState.Default:
-                Debug.Log("Reset to default");
+                animator.SetTrigger("Default");
                 break;
             case MovementState.Sliding:
-                Debug.Log("Sliding animation");
+                //Debug.Log("Sliding animation");
+                animator.SetTrigger("Slide");
                 break;
             case MovementState.Jumping:
-                Debug.Log("Jumping animation");
+                animator.SetTrigger("Jump");
+                break;
+            case MovementState.Lunging:
+                //Debug.Log("Jumping animation");
+                animator.SetTrigger("Jump");
+                break;
+            case MovementState.Backflip:
+                animator.SetTrigger("Backflip");
                 break;
         }
     }
@@ -100,9 +108,11 @@ public class PlayerMovement : MonoBehaviour
         {
             
             horizontal = Input.GetAxisRaw("Horizontal");
+            animator.SetInteger("Horizontal", (int)horizontal);
         }
 
-        
+        animator.SetBool("Grounded", IsGrounded());
+
         FlipSprite();
 
         if (_flipped)
@@ -125,11 +135,15 @@ public class PlayerMovement : MonoBehaviour
             //_sliding = false;
 
             OnPlayerStopSliding?.Invoke();
-            Debug.Log("Lunging");
+            // Debug.Log("Lunging");
+            movementState = MovementState.Lunging;
+            HandleMovementStateAnimator(MovementState.Lunging);
             PlayerLunge();
             return;
         }
-        Debug.Log("Should be jumping");
+        //movementState = MovementState.Lunging;
+        HandleMovementStateAnimator(MovementState.Lunging);// Hard coded until we have a lunge animation no need to add unneccessary enums for edge cases
+        
         if (rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -143,10 +157,11 @@ public class PlayerMovement : MonoBehaviour
     
     private void PlayerSlide()
     {
-        if (_BfRunning)
+        if (_BfRunning && IsGrounded())
         {
             //Debug.Log("Backflip");
             StartCoroutine(BackflipRotation());
+            HandleMovementStateAnimator(MovementState.Backflip);
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower * 2);
             return;
         }
@@ -167,8 +182,7 @@ public class PlayerMovement : MonoBehaviour
     private IEnumerator Lunging()
     {
         // _lunging = true;
-        movementState = MovementState.Jumping;
-        HandleMovementStateAnimator(movementState);
+        
         yield return new WaitForSeconds(0.2f);
         while (!IsGrounded())
         {
@@ -248,9 +262,10 @@ public class PlayerMovement : MonoBehaviour
             case MovementState.Sliding:
                 rb.linearVelocity = new Vector3((slidingHorizontal * speed) * slideBoost, rb.linearVelocity.y);
                 break;
-            case MovementState.Jumping:
-                Debug.Log("loonge");
+            case MovementState.Lunging:
+                
                 break;
+
         }
         
             // if (movementState != MovementState.Sliding) rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
@@ -300,7 +315,7 @@ public class PlayerMovement : MonoBehaviour
     {
         float flippedRotationSpeed = isFacingRight ? BackflipRotationSpeed : BackflipRotationSpeed*-1;
         yield return new WaitForSeconds(0.2f);
-        Debug.Log("Start rotation");
+        // Debug.Log("Start rotation");
 
         while (!IsGrounded())
         {
@@ -310,7 +325,7 @@ public class PlayerMovement : MonoBehaviour
         
         OnPlayerStopSliding?.Invoke();
         sr.transform.rotation = Quaternion.identity;
-        Debug.Log("End rotation");
+        // Debug.Log("End rotation");
     }
 
 }
@@ -319,5 +334,7 @@ public enum MovementState
 {
     Default,
     Sliding,
-    Jumping
+    Jumping, // ANIMATION ONLY, would break movement
+    Lunging, // Uses the animation of jumping, alters movement
+    Backflip // ANIMATION ONLY, would break movement
 }
