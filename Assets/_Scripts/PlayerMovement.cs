@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private PlayerAimAndShoot playerAimAndShoot;
 
     private bool isFacingRight = true;
+
+    private MovementState movementState = default;
+    [SerializeField] private Animator animator;
     
     [SerializeField] GameObject sr;
     [SerializeField] private Rigidbody rb;
@@ -24,8 +27,9 @@ public class PlayerMovement : MonoBehaviour
     public static Action OnPlayerStopSliding;
 
     private bool _canMove;
-    private bool _sliding;
     private float slideBoost = 2f;
+    private IEnumerator SlideCoroutine;
+
     
     private bool _flipped = false; // has the player flipped in the last 0.3 seconds
     private bool _BfRunning = false; // Backflipwindow coroutine is running
@@ -34,11 +38,11 @@ public class PlayerMovement : MonoBehaviour
     private float BackflipRotationSpeed = 200f;
 
 
-    //private Coroutine test;
+    
 
     private void Awake() => Instance = this;
 
-    private void OnEnable()
+    private void OnEnable() // Allows input
     {
         ControlsManager.OnPlayerJump += PlayerJump;
         ControlsManager.OnPlayerSlide += PlayerSlide;
@@ -47,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    private void OnDisable()
+    private void OnDisable() // Stops input
     {
         ControlsManager.OnPlayerJump -= PlayerJump;
         ControlsManager.OnPlayerSlide -= PlayerSlide;
@@ -69,17 +73,37 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    private void HandleMovementStateAnimator(MovementState state)
+    {
+        switch (state)
+        {
+            case MovementState.Default:
+                Debug.Log("Reset to default");
+                break;
+            case MovementState.Sliding:
+                Debug.Log("Sliding animation");
+                break;
+            case MovementState.Jumping:
+                Debug.Log("Jumping animation");
+                break;
+        }
+    }
+
     void Update()
     {
-        
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    rb.AddForce(Vector3.right*horizontal * jumpingPower, ForceMode.VelocityChange);
+        //}
 
         if (_canMove)
         {
+            
             horizontal = Input.GetAxisRaw("Horizontal");
         }
 
         
-        Flip();
+        FlipSprite();
 
         if (_flipped)
         {
@@ -94,7 +118,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!IsGrounded()) return;
 
-        
+        if (movementState == MovementState.Sliding)
+        {
+            StopCoroutine(SlideCoroutine);
+            slideBoost = 2f;
+            //_sliding = false;
+
+            OnPlayerStopSliding?.Invoke();
+            Debug.Log("Lunging");
+            PlayerLunge();
+            return;
+        }
+        Debug.Log("Should be jumping");
         if (rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
@@ -103,6 +138,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
         }
+        
     }
     
     private void PlayerSlide()
@@ -114,14 +150,40 @@ public class PlayerMovement : MonoBehaviour
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower * 2);
             return;
         }
-        if (!IsGrounded() || _sliding) return;
+        if (!IsGrounded() || movementState == MovementState.Sliding) return;
 
-        StartCoroutine(SlidingMomentum());
+        SlideCoroutine = SlidingMomentum();
+        StartCoroutine(SlideCoroutine);
+    }
+
+    private void PlayerLunge()
+    {
+        
+        //rb.AddForce(Vector3.right * horizontal * jumpingPower, ForceMode.VelocityChange);
+        StartCoroutine(Lunging());
+        rb.AddForce(new Vector3(1 * slidingHorizontal,1,0) * 5f, ForceMode.VelocityChange);
+    }
+
+    private IEnumerator Lunging()
+    {
+        // _lunging = true;
+        movementState = MovementState.Jumping;
+        HandleMovementStateAnimator(movementState);
+        yield return new WaitForSeconds(0.2f);
+        while (!IsGrounded())
+        {
+            yield return null;
+        }
+        movementState = MovementState.Default;
+        HandleMovementStateAnimator (movementState);
+        //_lunging = false;
     }
 
     private IEnumerator SlidingMomentum()
     {
-        _sliding = true;
+        //_sliding = true;
+        movementState = MovementState.Sliding;
+        HandleMovementStateAnimator(movementState);
         slidingHorizontal = (isFacingRight) ? 1f : -1f;
         slideBoost = 2f;
         //Debug.Log("Start slide");
@@ -139,10 +201,10 @@ public class PlayerMovement : MonoBehaviour
             CalcSlideBoost();
 
         }
-        //Debug.Log(rb.linearVelocity.x);
         //Debug.Log("End slide");
         slideBoost = 2f;
-        _sliding = false;
+        movementState = MovementState.Default;
+        HandleMovementStateAnimator(movementState);
 
         OnPlayerStopSliding?.Invoke();
     }
@@ -178,11 +240,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!_sliding) rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
-        else rb.linearVelocity = new Vector3((slidingHorizontal * speed) * slideBoost, rb.linearVelocity.y);
+        switch (movementState)
+        {
+            case MovementState.Default:
+                rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
+                break;
+            case MovementState.Sliding:
+                rb.linearVelocity = new Vector3((slidingHorizontal * speed) * slideBoost, rb.linearVelocity.y);
+                break;
+            case MovementState.Jumping:
+                Debug.Log("loonge");
+                break;
+        }
+        
+            // if (movementState != MovementState.Sliding) rb.linearVelocity = new Vector3(horizontal * speed, rb.linearVelocity.y);
+            // else rb.linearVelocity = new Vector3((slidingHorizontal * speed) * slideBoost, rb.linearVelocity.y);
+        
     }
 
-    private void Flip()
+    private void FlipSprite()
     {
         Vector3 playerScreenPos = Camera.main.WorldToScreenPoint(transform.position);
         float flipDir = (Input.mousePosition.x > playerScreenPos.x) ? 1f : -1f;
@@ -236,4 +312,12 @@ public class PlayerMovement : MonoBehaviour
         sr.transform.rotation = Quaternion.identity;
         Debug.Log("End rotation");
     }
+
+}
+
+public enum MovementState
+{
+    Default,
+    Sliding,
+    Jumping
 }
