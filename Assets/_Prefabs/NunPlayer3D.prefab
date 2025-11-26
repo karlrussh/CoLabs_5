@@ -136,6 +136,7 @@ MonoBehaviour:
   speed: 4
   jumpingPower: 5
   playerAimAndShoot: {fileID: 0}
+  animator: {fileID: 8420343578392780834}
   sr: {fileID: 2929472398504724738}
   rb: {fileID: -3323689391256997604}
   groundCheck: {fileID: 4942419514237698437}
@@ -5085,7 +5086,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4369086827837386534}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.000002428889, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0000017434356, w: 1}
   m_LocalPosition: {x: 3.36, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5345,7 +5346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2282113697528971189, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.29802775
+      value: 0.29802844
       objectReference: {fileID: 0}
     - target: {fileID: -2282113697528971189, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5353,7 +5354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2282113697528971189, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.95455724
+      value: -0.954557
       objectReference: {fileID: 0}
     - target: {fileID: 2640368805970092526, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5386,6 +5387,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7421516855904878591}
+    - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8420343578392780834}
   m_SourcePrefab: {fileID: 4843985084834002234, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
 --- !u!4 &856850576626911569 stripped
 Transform:
@@ -5431,6 +5435,28 @@ MonoBehaviour:
   _mainCamera: {fileID: 0}
   _Effector: {fileID: 1428374524464170514}
   zDepth: 0
+--- !u!95 &8420343578392780834
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2929472398504724738}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e787eef363710ed459a6fc70aa4a5f6d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &4066621222725931361 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
