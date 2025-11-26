@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isFacingRight = true;
 
-    [SerializeField] private MovementState movementState;
+    private MovementState movementState = default;
     [SerializeField] private Animator animator;
     
     [SerializeField] GameObject sr;
@@ -78,11 +78,13 @@ public class PlayerMovement : MonoBehaviour
         switch (state)
         {
             case MovementState.Default:
-
+                Debug.Log("Reset to default");
                 break;
             case MovementState.Sliding:
+                Debug.Log("Sliding animation");
                 break;
             case MovementState.Jumping:
+                Debug.Log("Jumping animation");
                 break;
         }
     }
@@ -128,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         Debug.Log("Should be jumping");
-        /*if (rb.linearVelocity.y > 0f)
+        if (rb.linearVelocity.y > 0f)
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
         }
@@ -136,7 +138,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower);
         }
-        */
+        
     }
     
     private void PlayerSlide()
