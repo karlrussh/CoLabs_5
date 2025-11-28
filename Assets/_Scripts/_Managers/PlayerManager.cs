@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public enum PlayerState
@@ -19,6 +20,18 @@ public class PlayerManager : MonoBehaviour
     public static event Action<PlayerState> OnPlayerStateChanged;
 
     void Awake() => Instance = this;
+
+    private void OnEnable()
+    {
+        ControlsManager.OnAimStart += EnterFirstPerson;
+        ControlsManager.OnAimStop += EnterThirdPerson;
+    }
+
+    private void OnDisable()
+    {
+        ControlsManager.OnAimStart -= EnterFirstPerson;
+        ControlsManager.OnAimStop -= EnterThirdPerson;
+    }
 
     public void UpdatePlayerState(PlayerState newState)
     {
@@ -68,12 +81,22 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleInThirdPerson()
     {
-        throw new NotImplementedException();
+
+    }
+
+    private void EnterThirdPerson()
+    {
+        UpdatePlayerState(PlayerState.InThirdPerson);
     }
 
     private void HandleInFirstPerson()
     {
-        throw new NotImplementedException();
+
+    }
+
+    private void EnterFirstPerson()
+    {
+        UpdatePlayerState(PlayerState.InFirstPerson);
     }
 
     private void HandleInUI()
