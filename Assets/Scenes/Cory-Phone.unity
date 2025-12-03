@@ -130,6 +130,8 @@ GameObject:
   - component: {fileID: 2068476}
   - component: {fileID: 2068475}
   - component: {fileID: 2068474}
+  - component: {fileID: 2068477}
+  - component: {fileID: 2068478}
   m_Layer: 5
   m_Name: Image
   m_TagString: Untagged
@@ -194,6 +196,40 @@ RectTransform:
   m_AnchoredPosition: {x: -0.000030518, y: -0.0014343}
   m_SizeDelta: {x: 1920, y: 1051.2}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!95 &2068477
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068473}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: de8f7f4e59317dd41b7f5587be34a822, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2068478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8db7b1cefaf633a489ba3523cbba50bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &25451033
 GameObject:
   m_ObjectHideFlags: 0
@@ -3266,7 +3302,7 @@ MonoBehaviour:
   fadeInOut: {fileID: 2068474}
   teleportLocation: {x: 5.909, y: 3.454, z: 0}
   player: {fileID: 534475953}
-  fadeSpeed: 0
+  animator: {fileID: 2068477}
 --- !u!65 &598887010
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3297,7 +3333,7 @@ Transform:
   m_GameObject: {fileID: 598887008}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23.19, y: -1.24, z: -0.08}
+  m_LocalPosition: {x: 0.07, y: -1.24, z: -0.08}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
