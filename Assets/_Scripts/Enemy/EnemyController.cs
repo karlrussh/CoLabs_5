@@ -147,9 +147,8 @@ public class EnemyController : MonoBehaviour
         if (!healthSlider) return;
         healthSlider.value = _currentHp;
     }
-
-    // ReSharper disable Unity.PerformanceAnalysis
-    public void Die()
+    
+    private void Die()
     {
         if (_cleansed) return;
         UpdateEnemyState(EnemyState.Cleansed);

@@ -58,13 +58,6 @@ public class WaterGunController : MonoBehaviour
             var enemyController = hit.transform.gameObject.GetComponent<EnemyController>();
             enemyController.DamageEnemy(bulletDamage);
         }
-        else
-        {
-            // if nothing hit, aim far into the distance
-            Vector3 fallbackPoint = ray.GetPoint(100f);
-            Vector3 dir = fallbackPoint - _startPos.position;
-            _waterParticles.transform.rotation = Quaternion.LookRotation(dir);
-        }
     }
 
     private void HandleShootRequested()
