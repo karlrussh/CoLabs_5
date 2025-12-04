@@ -1,5 +1,6 @@
 using System;
 using Mono.Cecil;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,6 +22,8 @@ public class SpriteEnemyController : MonoBehaviour
 
     private bool targetFound;
     private Vector3 spawnPos;
+    
+    [SerializeField] private ParticleSystem deathparticles;
 
     private void Start()
     {
@@ -79,6 +82,7 @@ public class SpriteEnemyController : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     public void die()
     {
+        Instantiate(deathparticles, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
     

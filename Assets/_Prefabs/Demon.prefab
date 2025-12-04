@@ -189,3 +189,4 @@ MonoBehaviour:
   attackDistance: 3
   Speed: 2
   maxHp: 1
+  deathparticles: {fileID: 2687238937469650393, guid: cbdf2a0b192368c4ea305687ecc93205, type: 3}

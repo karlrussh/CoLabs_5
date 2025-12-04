@@ -78,7 +78,7 @@ public class EnemyController : MonoBehaviour
         
         if (!state)
         {   
-            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
+            transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1.1f);
 
             if (!healthSlider) return;
             healthSlider.gameObject.SetActive(false);
@@ -170,9 +170,15 @@ public class EnemyController : MonoBehaviour
         {
             for (int i = 0; i < numDemons; i++)
             {
-                Instantiate(typeOfDemons, transform.position, quaternion.EulerXYZ(0, 0, 0));
+                RandomPos();
+                Instantiate(typeOfDemons, spawnPos, quaternion.EulerXYZ(0, 0, 0));
             }
         }
+    }
+    
+    private void RandomPos()
+    {
+        spawnPos = new Vector3(transform.position.x + UnityEngine.Random.Range(-2, 2), transform.position.y + 1, transform.position.z + UnityEngine.Random.Range(-2, 2)/2);
     }
     
     #endregion
