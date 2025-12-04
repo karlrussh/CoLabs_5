@@ -15,6 +15,8 @@ public class AmmoBarManager : MonoBehaviour
         ControlsManager.OnShootStopped += HandleShootStopped;
     }
 
+
+
     private void OnDisable()
     {
         ControlsManager.OnShootRequested -= HandleShootRequested;

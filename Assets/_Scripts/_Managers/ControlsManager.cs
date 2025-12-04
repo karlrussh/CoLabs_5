@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEngine.InputSystem;
 using System.Collections;
+using UnityEditor.Searcher;
 
 public class ControlsManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class ControlsManager : MonoBehaviour
     public static event Action OnPlayerJump;
 
     public static event Action OnPlayerSlide;
+    
+    public static event Action OnPlayerReload;
 
     void Awake() => Instance = this;
 
@@ -98,6 +101,12 @@ public class ControlsManager : MonoBehaviour
             //Debug.Log("Stopped Aiming");
         }
 
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SetReload(true);
+            OnPlayerReload?.Invoke();
+        }
+
         if (Input.GetButtonDown("Jump"))
         {
             OnPlayerJump?.Invoke();
@@ -110,7 +119,12 @@ public class ControlsManager : MonoBehaviour
         }
     }
 
-    private void SetAim(bool aiming)
+    public void SetReload(bool reloading)
+    {
+        IsReloading = reloading;
+    }
+
+    public void SetAim(bool aiming)
     {
         IsAiming = aiming;
     }

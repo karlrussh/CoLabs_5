@@ -20,12 +20,7 @@ public class PlayerManager : MonoBehaviour
     public static event Action<PlayerState> OnPlayerStateChanged;
 
     void Awake() => Instance = this;
-
-    private void Start()
-    {
-
-    }
-
+    
     private void OnEnable()
     {
         ControlsManager.OnAimStart += EnterFirstPerson;

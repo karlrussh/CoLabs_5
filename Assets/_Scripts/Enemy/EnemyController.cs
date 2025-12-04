@@ -125,6 +125,7 @@ public class EnemyController : MonoBehaviour
 
     private void Attack()
     {
+        PlayerHealthManager.Instance.RemoveHealth(1);
         Debug.Log("Attack");
     }
 
