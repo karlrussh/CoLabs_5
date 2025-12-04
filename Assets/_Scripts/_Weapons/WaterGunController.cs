@@ -55,7 +55,8 @@ public class WaterGunController : MonoBehaviour
             Vector3 dir = hit.point - _startPos.position;
             _waterParticles.transform.rotation = Quaternion.LookRotation(dir);
 
-            hit.transform.gameObject.GetComponent<EnemyController>().DamageEnemy(bulletDamage);
+            var enemyController = hit.transform.gameObject.GetComponent<EnemyController>();
+            enemyController.DamageEnemy(bulletDamage);
         }
         else
         {

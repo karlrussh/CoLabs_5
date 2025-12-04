@@ -1,6 +1,7 @@
 using System;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.UI;
 
 internal enum EnemyState
 {
@@ -21,6 +22,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private float maxHp;
     private float _currentHp;
+    [SerializeField] private float healthGainMultiplier = 15f; 
 
     private bool targetFound;
     private Vector3 spawnPos;
@@ -30,7 +32,8 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private GameObject enemyDemon;
     [SerializeField] private GameObject enemyCleansed;
-
+    [SerializeField] private Slider healthSlider;
+    
     private bool _cleansed;
     
     private void Start()
@@ -39,6 +42,10 @@ public class EnemyController : MonoBehaviour
         
         UpdateEnemyState(EnemyState.Demon);
         _currentHp = maxHp;
+
+        if (!healthSlider) return;
+        healthSlider.maxValue = maxHp;
+        healthSlider.value = maxHp;
     }
     
         
@@ -60,13 +67,13 @@ public class EnemyController : MonoBehaviour
 
         OnEnemyStateChanged?.Invoke(newState);
     }
-
+    
     private void StateInitialized(bool state)
     {   
         enemyDemon.SetActive(state);
         enemyCleansed.SetActive(!state);
         _cleansed = !state;
-
+        
         if (!state)
         {   
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
@@ -80,6 +87,8 @@ public class EnemyController : MonoBehaviour
             if (_cleansed) return;
             targetFound = true;
         }
+
+        AddHealth(healthGainMultiplier);
     }
     
     #region follow player
@@ -115,11 +124,28 @@ public class EnemyController : MonoBehaviour
     public void DamageEnemy(float damage)
     {
         if (_cleansed) return;
-        _currentHp -= damage;
 
-        if (!(_currentHp < 0f)) return;
-        _currentHp = 0f;
-        Die();
+        _currentHp -= damage;
+        
+        if (_currentHp <= 0f)
+        {
+            _currentHp = 0f;
+            Die();
+        }
+        if (!healthSlider) return;
+        healthSlider.value = _currentHp;
+    }
+
+    private void AddHealth(float multiplier)
+    {
+        _currentHp += Time.deltaTime * multiplier;
+
+        if (_currentHp > maxHp)
+        {
+            _currentHp = maxHp;
+        }
+        if (!healthSlider) return;
+        healthSlider.value = _currentHp;
     }
 
     // ReSharper disable Unity.PerformanceAnalysis
@@ -134,7 +160,7 @@ public class EnemyController : MonoBehaviour
         {
             for (int i = 0; i < numDemons; i++)
             {
-                Instantiate(typeOfDemons, new Vector3(transform.position.x, transform.position.y, transform.position.z), quaternion.EulerXYZ(0, 0, 0));
+                Instantiate(typeOfDemons, transform.position, quaternion.EulerXYZ(0, 0, 0));
             }
         }
     }

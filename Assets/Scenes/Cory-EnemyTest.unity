@@ -6743,20 +6743,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 586251149777010671, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
-      propertyPath: ThirdPersonCamPos
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 586251149777010671, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
       propertyPath: _cinemachinePositionComposer
       value: 
       objectReference: {fileID: 970478564}
     - target: {fileID: 1124026782191242654, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
       propertyPath: m_Name
       value: NunPlayer3D
-      objectReference: {fileID: 0}
-    - target: {fileID: 1172512417643685845, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.000002428889
       objectReference: {fileID: 0}
     - target: {fileID: 1260732526630699997, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6797,18 +6789,6 @@ PrefabInstance:
     - target: {fileID: 1260732526630699997, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2491925513748891476, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
-      propertyPath: bulletDamage
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698199018934020340, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.29802775
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698199018934020340, guid: b0c4b4515809e2b44b8bd3b6e855bfd7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0.95455724
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8041,6 +8021,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 74858592005159021, guid: deb5c6d2e758778409acd9ef55bd8e8b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 74858592005159021, guid: deb5c6d2e758778409acd9ef55bd8e8b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1197879959075163787, guid: deb5c6d2e758778409acd9ef55bd8e8b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.22

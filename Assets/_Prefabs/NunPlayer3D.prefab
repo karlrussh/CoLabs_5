@@ -158,7 +158,7 @@ MonoBehaviour:
   _cinemachinePositionComposer: {fileID: 0}
   _lookAtPoint: {fileID: 80441453957036462}
   _Nun: {fileID: 2929472398504724738}
-  ThirdPersonCamPos: 6
+  ThirdPersonCamPos: 10
   FirstPersonCamPos: 3
   TransitionTime: 0.6
   FirstPersonTargetOffsetX: 2
@@ -184,7 +184,7 @@ MonoBehaviour:
   _aimMask:
     serializedVersion: 2
     m_Bits: 256
-  bulletDamage: 1
+  bulletDamage: 0.5
   bulletsPerShot: 0.05
 --- !u!114 &666452005285451121
 MonoBehaviour:
@@ -5200,7 +5200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4369086827837386534}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.0000017434356, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.000002428889, w: 1}
   m_LocalPosition: {x: 3.36, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5468,7 +5468,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2282113697528971189, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.29802844
+      value: 0.29802775
       objectReference: {fileID: 0}
     - target: {fileID: -2282113697528971189, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.y
@@ -5476,7 +5476,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2282113697528971189, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.954557
+      value: -0.95455724
       objectReference: {fileID: 0}
     - target: {fileID: 2640368805970092526, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalRotation.w
