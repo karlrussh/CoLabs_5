@@ -311,7 +311,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -159156585, guid: 3289c103462959241af61c62349a2ffe, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.7971698, b: 0.8120565, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5346,7 +5346,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 1047095197, guid: fbebe7c62d33e9c4aaac443a21188999, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.8, b: 0.8156863, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -5429,6 +5429,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1260732526630699997}
     m_Modifications:
+    - target: {fileID: -8959945404532475017, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8156863
+      objectReference: {fileID: 0}
+    - target: {fileID: -8959945404532475017, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: -8653719598885068355, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_Name
       value: nun
@@ -5520,6 +5528,14 @@ PrefabInstance:
     - target: {fileID: 2640368805970092526, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 20.591
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571227861654105074, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8156863
+      objectReference: {fileID: 0}
+    - target: {fileID: 3571227861654105074, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 7850666532070979353, guid: 8fc5638f6bc11ee45a295cab72296035, type: 3}
       propertyPath: m_IsActive
