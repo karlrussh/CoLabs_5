@@ -77,6 +77,9 @@ public class EnemyController : MonoBehaviour
         if (!state)
         {   
             transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1f);
+
+            if (!healthSlider) return;
+            healthSlider.gameObject.SetActive(false);
         }
     }
 
