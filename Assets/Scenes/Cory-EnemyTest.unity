@@ -4148,7 +4148,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 216af83b550dc0e46a2a77490ff03324, type: 2}
+  - {fileID: 2100000, guid: 38523540ff5b7e7448cb76b12a172e22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5159,8 +5159,8 @@ Transform:
   m_GameObject: {fileID: 1176513013}
   serializedVersion: 2
   m_LocalRotation: {x: -1, y: -0, z: -0, w: -0.00000035762784}
-  m_LocalPosition: {x: -14.766, y: -0.55410004, z: -1.5336001}
-  m_LocalScale: {x: 0.13786, y: 1.5619, z: 1.7289981}
+  m_LocalPosition: {x: -14.766, y: -0.554, z: -0.912}
+  m_LocalScale: {x: 0.13786, y: 1.5619, z: 0.50093997}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 558389727}
@@ -5336,7 +5336,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 216af83b550dc0e46a2a77490ff03324, type: 2}
+  - {fileID: 2100000, guid: 38523540ff5b7e7448cb76b12a172e22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5930,6 +5930,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
+      propertyPath: m_ClearFlags
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
       propertyPath: far clip plane
       value: 1000
       objectReference: {fileID: 0}
@@ -5943,15 +5947,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
       propertyPath: m_BackGroundColor.b
-      value: 0
+      value: 0.028301895
       objectReference: {fileID: 0}
     - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
       propertyPath: m_BackGroundColor.g
-      value: 0
+      value: 0.028301895
       objectReference: {fileID: 0}
     - target: {fileID: 5335486971075400479, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
       propertyPath: m_BackGroundColor.r
-      value: 0
+      value: 0.028301895
       objectReference: {fileID: 0}
     - target: {fileID: 6339138960056244399, guid: e0751f51f81749a4c8d1c90496ef8047, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6281,7 +6285,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 216af83b550dc0e46a2a77490ff03324, type: 2}
+  - {fileID: 2100000, guid: 38523540ff5b7e7448cb76b12a172e22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -6389,7 +6393,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 216af83b550dc0e46a2a77490ff03324, type: 2}
+  - {fileID: 2100000, guid: 38523540ff5b7e7448cb76b12a172e22, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7940,6 +7944,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 631404433216796305, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 631404433216796305, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 631404433216796305, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2265320234306274310, guid: 9cf1ed4c399305843af9b86c2d8c8f50, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -1,10 +1,12 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class AmmoBarManager : MonoBehaviour
 {
     [SerializeField] Slider _AmmoSlider;
+    [SerializeField] TextMeshProUGUI AmmoText;
     private bool _isShooting = false;
 
     private void OnEnable()
@@ -28,12 +30,15 @@ public class AmmoBarManager : MonoBehaviour
 
         _AmmoSlider.maxValue = AmmoManager.Instance.MaxAmmo;
         _AmmoSlider.value = AmmoManager.Instance.AmmoCount;
+        
+        AmmoText.SetText($"{(int)AmmoManager.Instance.MaxAmmo}Ml");
     }
 
     private void Update()
     {
-        if(_isShooting)
-            _AmmoSlider.value = AmmoManager.Instance.AmmoCount;
+        if (!_isShooting) return;
+        _AmmoSlider.value = AmmoManager.Instance.AmmoCount;
+        AmmoText.SetText($"{(int)AmmoManager.Instance.AmmoCount}Ml");
     }
 
     private void HandleShootRequested()
