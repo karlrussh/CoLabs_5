@@ -23,6 +23,10 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
         if (PlayerManager.Instance != null)
         {
             UpdateGameState(GameState.GameStarted); // Change later
@@ -32,8 +36,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("PlayerManager null");
         }
-            
-    } 
+    }
 
     public void UpdateGameState(GameState newState)
     {

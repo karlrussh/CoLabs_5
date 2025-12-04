@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
@@ -33,6 +34,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject enemyDemon;
     [SerializeField] private GameObject enemyCleansed;
     [SerializeField] private Slider healthSlider;
+    [SerializeField] private TextMeshProUGUI statusText;
     
     private bool _cleansed;
     
@@ -80,6 +82,12 @@ public class EnemyController : MonoBehaviour
 
             if (!healthSlider) return;
             healthSlider.gameObject.SetActive(false);
+            
+            statusText.SetText("cleansed");
+        }
+        else
+        {
+            statusText.SetText("possessed");
         }
     }
 
