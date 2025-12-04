@@ -184,7 +184,8 @@ MonoBehaviour:
   _aimMask:
     serializedVersion: 2
     m_Bits: 256
-  _bulletsPerShot: 1
+  bulletDamage: 1
+  bulletsPerShot: 0.05
 --- !u!114 &666452005285451121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +199,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _handStartPos: {fileID: 4369086827837386534}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1159945442221738671
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5376310615255721880}
   - component: {fileID: 7982314064240364827}
   - component: {fileID: 5036144633688150943}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,9 +119,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1197879959075163787}
-  - component: {fileID: 8496521146488120535}
   - component: {fileID: 173305054027655061}
-  m_Layer: 0
+  - component: {fileID: 6358853877131981588}
+  m_Layer: 9
   m_Name: Demon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,26 +144,6 @@ Transform:
   - {fileID: 161158520357556808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8496521146488120535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9018481782187807359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370197d1562e62e4ab11d2ee193ca21a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  rb: {fileID: 173305054027655061}
-  numDemons: 0
-  typeOfDemons: {fileID: 9018481782187807359}
-  rangeOfSight: 10
-  attackDistance: 3
-  HP: 100
-  Speed: 2
 --- !u!54 &173305054027655061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,5 +169,25 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &6358853877131981588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9018481782187807359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e544944cf5914438d1345cb44da4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  rb: {fileID: 173305054027655061}
+  numDemons: 0
+  typeOfDemons: {fileID: 0}
+  rangeOfSight: 10
+  attackDistance: 3
+  Speed: 2
+  maxHp: 1

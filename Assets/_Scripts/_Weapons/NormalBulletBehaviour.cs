@@ -25,7 +25,7 @@ public class NormalBulletBehaviour : MonoBehaviour
 
         if (other.gameObject.GetComponent<EnemyController>())
         {
-            other.gameObject.GetComponent<EnemyController>().die();
+            other.gameObject.GetComponent<EnemyController>().Die();
             //Destroy(other.gameObject);
         }
     }

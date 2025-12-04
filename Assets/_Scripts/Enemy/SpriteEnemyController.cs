@@ -1,55 +1,44 @@
+using System;
 using Mono.Cecil;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class EnemyController : MonoBehaviour
+public class SpriteEnemyController : MonoBehaviour
 {
     [SerializeField] private GameObject target;
     [SerializeField] private Rigidbody rb;
+    
     [SerializeField] private int numDemons;
     [SerializeField] private GameObject typeOfDemons;
+    
     [SerializeField] private float rangeOfSight, attackDistance;
-    [SerializeField] private float HP, Speed;
+
+    [SerializeField] private float Speed;
+
+    [SerializeField] private float maxHp;
+    private float _currentHp;
+
     private bool targetFound;
     private Vector3 spawnPos;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Start()
     {
         target = GameObject.FindGameObjectWithTag("Player");
+        
+        _currentHp = maxHp;
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    private void Update()
     {
         if(transform.position.x + rangeOfSight > target.transform.position.x && target.transform.position.x > transform.position.x - rangeOfSight)
         {
             targetFound = true;
         }
-        if(HP <= 0)
-        {
-            die();
-        }
     }
-
-    public void die()
-    {
-        if(numDemons <= 0)
-        {
-        }
-        else
-        {
-            for (int i = 0; i < numDemons; i++)
-            {
-                RandomPos();
-                Instantiate(typeOfDemons, spawnPos, quaternion.EulerXYZ(0, 0, 0));
-            }
-        }
-        Destroy(gameObject);
-    }
-
-
-
+    
+    #region follow player
+    
     private void FixedUpdate()
     {
         if(targetFound)
@@ -74,12 +63,24 @@ public class EnemyController : MonoBehaviour
         Debug.Log("Attack");
     }
 
-    private void RandomPos()
+    #endregion
+    
+    #region Health
+
+    public void DamageEnemy(float damage)
     {
-        spawnPos = new Vector3(transform.position.x + UnityEngine.Random.Range(-2, 2), transform.position.y + 1, transform.position.z + UnityEngine.Random.Range(-2, 2)/2);
+        _currentHp -= damage;
+
+        if (!(_currentHp < 0f)) return;
+        _currentHp = 0f;
+        die();
     }
-    public void testKill()
+
+    // ReSharper disable Unity.PerformanceAnalysis
+    public void die()
     {
-        HP = 0;
+        Destroy(gameObject);
     }
+    
+    #endregion
 }

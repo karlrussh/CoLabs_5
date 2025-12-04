@@ -10,7 +10,8 @@ public class WaterGunController : MonoBehaviour
     [SerializeField] Camera _mainCamera;
     [SerializeField] LayerMask _aimMask;
 
-    [SerializeField] float _bulletsPerShot = 1f;
+    [SerializeField] private float bulletDamage = 1f;
+    [SerializeField] private float bulletsPerShot = 1f;
 
     private bool _isShooting = false;
 
@@ -35,7 +36,7 @@ public class WaterGunController : MonoBehaviour
 
         if (_isShooting)
         {
-            AmmoManager.Instance.TakeAmmo(_bulletsPerShot);
+            AmmoManager.Instance.TakeAmmo(bulletsPerShot);
             AimAtMouse();
         }
 
@@ -53,6 +54,8 @@ public class WaterGunController : MonoBehaviour
         {
             Vector3 dir = hit.point - _startPos.position;
             _waterParticles.transform.rotation = Quaternion.LookRotation(dir);
+
+            hit.transform.gameObject.GetComponent<EnemyController>().DamageEnemy(bulletDamage);
         }
         else
         {

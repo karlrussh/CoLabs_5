@@ -8,7 +8,7 @@ public class AmmoManager : MonoBehaviour
     [SerializeField] public float MaxAmmo { get; private set; } = 100f;
 
     public float CleanseAmmoCount { get; private set; }
-    [SerializeField] public float CleanseMaxAmmo { get; private set; } = 3f;
+    [SerializeField] public float CleanseMaxAmmo { get; private set; } = 6f;
 
     private void Awake() 
     {
