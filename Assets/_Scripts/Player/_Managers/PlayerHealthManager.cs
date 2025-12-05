@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
@@ -61,11 +62,13 @@ public class PlayerHealthManager : MonoBehaviour
         _beenDamaged = true;
         _realAfterDamageTimer = afterDamageTimer;
         
-        if (PlayerHealth <= 0)
+        if (PlayerHealth <= 0)    
         {
             PlayerHealth = 0;
             Die();
         }
+        
+        transform.DOShakePosition(0.25f, 0.25f, 5);
     }
 
     private void Die()

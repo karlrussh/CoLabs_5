@@ -1,7 +1,10 @@
 using System;
+using System.Collections;
+using DG.Tweening;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 internal enum EnemyState
@@ -35,6 +38,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private GameObject enemyCleansed;
     [SerializeField] private Slider healthSlider;
     [SerializeField] private TextMeshProUGUI statusText;
+
+    [SerializeField] private int DamageToPlayer = 5;
+    [SerializeField] private float afterDamageTimer = 0.5f;
+    private float _realAfterDamageTimer;
+    private bool _justAttacked = false;
     
     private bool _cleansed;
     
@@ -45,6 +53,8 @@ public class EnemyController : MonoBehaviour
         UpdateEnemyState(EnemyState.Demon);
         _currentHp = maxHp;
 
+        _realAfterDamageTimer = afterDamageTimer;
+        
         if (!healthSlider) return;
         healthSlider.maxValue = maxHp;
         healthSlider.value = maxHp;
@@ -106,6 +116,15 @@ public class EnemyController : MonoBehaviour
     
     private void FixedUpdate()
     {
+        if (_justAttacked)
+        {   
+            _realAfterDamageTimer -= Time.deltaTime;
+        }
+        if (_realAfterDamageTimer <= 0)
+        {
+            _justAttacked = false;
+        }
+        
         if(targetFound && !_cleansed)
         {
             if(target.transform.position.x + attackDistance < transform.position.x)
@@ -118,6 +137,7 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
+                if (_justAttacked) return;
                 Attack();
             }
         }
@@ -125,8 +145,11 @@ public class EnemyController : MonoBehaviour
 
     private void Attack()
     {
-        PlayerHealthManager.Instance.RemoveHealth(1);
-        Debug.Log("Attack");
+        PlayerHealthManager.Instance.RemoveHealth(DamageToPlayer);
+        _realAfterDamageTimer = afterDamageTimer;
+        _justAttacked = true;
+
+        transform.DOShakePosition(0.25f, 0.25f, 5);
     }
 
     #endregion

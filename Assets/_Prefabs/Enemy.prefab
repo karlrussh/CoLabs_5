@@ -701,6 +701,8 @@ MonoBehaviour:
   enemyCleansed: {fileID: 2544805160837063218}
   healthSlider: {fileID: 1942247639783505289}
   statusText: {fileID: 4475596577674519744}
+  DamageToPlayer: 5
+  afterDamageTimer: 0.8
 --- !u!114 &1437821694627209303
 MonoBehaviour:
   m_ObjectHideFlags: 0
