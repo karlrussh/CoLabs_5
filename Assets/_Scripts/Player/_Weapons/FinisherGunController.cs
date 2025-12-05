@@ -4,6 +4,7 @@ using UnityEngine;
 public class FinisherGunController : MonoBehaviour
 {
     [SerializeField] private GameObject _handStartPos;
+    [SerializeField] LayerMask _layerMask;
     private float _maxDistance = 100f;
 
     private void OnEnable()
@@ -20,7 +21,7 @@ public class FinisherGunController : MonoBehaviour
     {
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(cameraRay, out RaycastHit hit, _maxDistance))
+        if (Physics.Raycast(cameraRay, out RaycastHit hit, _maxDistance, _layerMask))
         {
             Vector3 aimDirection = (hit.point - _handStartPos.transform.position).normalized;
 
@@ -37,6 +38,7 @@ public class FinisherGunController : MonoBehaviour
                 IShootable shootable = obj;
                 shootable.HandleOnBulletHit();
             }
+            hit.transform.gameObject.GetComponent<SpriteEnemyController>().DamageEnemy(100f);
         }
         else
         {

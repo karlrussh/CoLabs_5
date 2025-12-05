@@ -60,6 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   State: 0
+  gameOverUI: {fileID: 0}
 --- !u!114 &3606600513363035439
 MonoBehaviour:
   m_ObjectHideFlags: 0

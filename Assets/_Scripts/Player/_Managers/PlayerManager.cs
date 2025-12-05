@@ -20,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     public static event Action<PlayerState> OnPlayerStateChanged;
 
     void Awake() => Instance = this;
-
+    
     private void OnEnable()
     {
         ControlsManager.OnAimStart += EnterFirstPerson;
@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleInGameOver()
     {
-        throw new NotImplementedException();
+
     }
 
     private void HandleInDialogue()

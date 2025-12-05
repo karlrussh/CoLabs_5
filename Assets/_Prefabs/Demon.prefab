@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 161158520357556808}
   - component: {fileID: 5376310615255721880}
   - component: {fileID: 7982314064240364827}
-  - component: {fileID: 5036144633688150943}
-  m_Layer: 0
+  - component: {fileID: 8436404860115102300}
+  m_Layer: 9
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6449915871761904682}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7982314064240364827
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0e1c914400c217d4aa753f9a22dd44b8, type: 2}
+  - {fileID: 2100000, guid: 2c4df410859d74340a0972479ec2e45d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,8 +87,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &5036144633688150943
-CapsuleCollider:
+--- !u!135 &8436404860115102300
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -105,10 +105,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 3
+  m_Radius: 0.71
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9018481782187807359
 GameObject:
@@ -119,9 +117,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1197879959075163787}
-  - component: {fileID: 8496521146488120535}
   - component: {fileID: 173305054027655061}
-  m_Layer: 0
+  - component: {fileID: 6358853877131981588}
+  m_Layer: 9
   m_Name: Demon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,32 +136,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 0.5497, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 161158520357556808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8496521146488120535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9018481782187807359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 370197d1562e62e4ab11d2ee193ca21a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  rb: {fileID: 173305054027655061}
-  numDemons: 0
-  typeOfDemons: {fileID: 9018481782187807359}
-  rangeOfSight: 10
-  attackDistance: 3
-  HP: 100
-  Speed: 2
 --- !u!54 &173305054027655061
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -189,5 +167,26 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 0
+--- !u!114 &6358853877131981588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9018481782187807359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e544944cf5914438d1345cb44da4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  rb: {fileID: 173305054027655061}
+  numDemons: 0
+  typeOfDemons: {fileID: 0}
+  rangeOfSight: 10
+  attackDistance: 3
+  Speed: 2
+  maxHp: 1
+  deathparticles: {fileID: 2687238937469650393, guid: cbdf2a0b192368c4ea305687ecc93205, type: 3}

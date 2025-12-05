@@ -20,6 +20,8 @@ public class CleanseCrosshairManager : MonoBehaviour
     [SerializeField] float _cleanseCrosshairHorizontalHeight = 5020f;
     [SerializeField] float _normalCrosshairHorizontalHeight = 100f;
 
+    private bool _inThirdPerson;
+    
     private void Start()
     {
         _cleanserAmmoCount.text = $"[{AmmoManager.Instance.CleanseAmmoCount}/{AmmoManager.Instance.CleanseMaxAmmo}]";
@@ -29,12 +31,16 @@ public class CleanseCrosshairManager : MonoBehaviour
     {
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChanged;
         ControlsManager.OnCleanseShootRequested += HandleCleanseShootRequested;
+        
+        ControlsManager.OnPlayerReload += HandleReload;
     }
-
+    
     void OnDisable()
     {
         PlayerManager.OnPlayerStateChanged -= HandlePlayerStateChanged;
         ControlsManager.OnCleanseShootRequested -= HandleCleanseShootRequested;
+        
+        ControlsManager.OnPlayerReload -= HandleReload;
     }
 
     private void HandlePlayerStateChanged(PlayerState state)
@@ -46,10 +52,12 @@ public class CleanseCrosshairManager : MonoBehaviour
                 CrosshairHeight(_cleanseCrosshairHorizontalHeight, _cleanseCrosshairVerticalHeight);
                 break;
             case PlayerState.InThirdPerson:
-                _cleanserAmmoCount.enabled = false;
+                _cleanserAmmoCount.enabled = ControlsManager.Instance.IsReloading;
                 CrosshairHeight(_normalCrosshairHorizontalHeight, _normalCrosshairVerticalHeight);
                 break;
         }
+        
+        _inThirdPerson = state == PlayerState.InThirdPerson;
     }
     private void HandleCleanseShootRequested()
     {
@@ -69,6 +77,27 @@ public class CleanseCrosshairManager : MonoBehaviour
         DOTween.To(() => _crosshairHorizontal.sizeDelta, x => _crosshairHorizontal.sizeDelta = x, new Vector2(5f, h_Height), 1f);
         DOTween.To(() => _crosshairVertical.sizeDelta, x => _crosshairVertical.sizeDelta = x, new Vector2(5f, v_Height), 1f);
         
+        yield return null;
+    }
+
+    private void HandleReload()
+    {
+        _cleanserAmmoCount.enabled = true;
+        StartCoroutine(StartReload());
+    }
+
+    private IEnumerator StartReload()
+    {
+        _cleanserAmmoCount.text = "reloading...";
+        yield return new WaitForSeconds(0.5f);
+        _cleanserAmmoCount.text = $"[{AmmoManager.Instance.CleanseAmmoCount}/{AmmoManager.Instance.CleanseMaxAmmo}]";
+
+        if (_inThirdPerson)
+        {
+            _cleanserAmmoCount.enabled = false;
+        }
+        
+        ControlsManager.Instance.SetReload(false);
         yield return null;
     }
 

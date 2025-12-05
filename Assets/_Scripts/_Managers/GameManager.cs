@@ -19,10 +19,16 @@ public class GameManager : MonoBehaviour
 
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
+    
+    [SerializeField] private Canvas gameOverUI;
 
     private void Awake()
     {
         Instance = this;
+    }
+
+    private void Start()
+    {
         if (PlayerManager.Instance != null)
         {
             UpdateGameState(GameState.GameStarted); // Change later
@@ -32,8 +38,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("PlayerManager null");
         }
-            
-    } 
+    }
 
     public void UpdateGameState(GameState newState)
     {
@@ -72,6 +77,9 @@ public class GameManager : MonoBehaviour
     private void HandleGameOver()
     {
         PlayerManager.Instance.UpdatePlayerState(PlayerState.InGameOver);
+        if (!gameOverUI) return;
+        gameOverUI.enabled = true;
+        Cursor.visible = true;
     }
 
     private void HandleGamePaused()

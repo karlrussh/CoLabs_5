@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AmmoManager : MonoBehaviour
@@ -8,8 +9,18 @@ public class AmmoManager : MonoBehaviour
     [SerializeField] public float MaxAmmo { get; private set; } = 100f;
 
     public float CleanseAmmoCount { get; private set; }
-    [SerializeField] public float CleanseMaxAmmo { get; private set; } = 3f;
+    [SerializeField] public float CleanseMaxAmmo { get; private set; } = 6f;
 
+    private void OnEnable()
+    {
+        ControlsManager.OnPlayerReload += HandleReload;
+    }
+    
+    private void OnDisable()
+    {
+        ControlsManager.OnPlayerReload -= HandleReload;
+    }
+    
     private void Awake() 
     {
         Instance = this;
@@ -55,5 +66,10 @@ public class AmmoManager : MonoBehaviour
         {
             CleanseAmmoCount = 0f;
         }
+    }
+    
+    private void HandleReload()
+    {
+        CleanseAddAmmo(CleanseMaxAmmo);
     }
 }

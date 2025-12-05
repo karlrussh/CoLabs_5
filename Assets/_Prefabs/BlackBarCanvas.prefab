@@ -262,7 +262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TopBar: {fileID: 9217681954087690547}
   BottomBar: {fileID: 5468417235706237187}
-  ThirdPersonBlackBarPos: 50
+  ThirdPersonBlackBarPos: 20
   FirstPersonBlackBarPos: -50
   TopBarOffsetY: 1080
   TransitionTime: 0.3
