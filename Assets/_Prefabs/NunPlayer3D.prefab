@@ -5741,7 +5741,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5349754819617999382, guid: 6b20a5eb49b0a91ba8a58b51e911b953, type: 3}
       propertyPath: ShapeModule.m_Scale.y
-      value: 0.43
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5349754819617999382, guid: 6b20a5eb49b0a91ba8a58b51e911b953, type: 3}
+      propertyPath: ShapeModule.m_Scale.z
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 5349754819617999382, guid: 6b20a5eb49b0a91ba8a58b51e911b953, type: 3}
       propertyPath: TrailModule.worldSpace

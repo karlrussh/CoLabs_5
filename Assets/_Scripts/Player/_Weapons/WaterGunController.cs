@@ -49,15 +49,27 @@ public class WaterGunController : MonoBehaviour
 
     private void AimAtMouse()
     {
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit, 1000f, _aimMask))
-        {
-            Vector3 dir = hit.point - _startPos.position;
-            _waterParticles.transform.rotation = Quaternion.LookRotation(dir);
+        Vector3 mouse = Input.mousePosition;
 
+        Vector3 mouseWorldPos =
+            Camera.main.ScreenToWorldPoint(new Vector3(mouse.x, mouse.y,
+                Mathf.Abs(Camera.main.transform.position.z)));
+        
+        mouseWorldPos.z = 0f;
+        
+        Vector3 direction = (mouseWorldPos - _startPos.position).normalized;
+        
+        float maxDist = Vector3.Distance(_startPos.position, mouseWorldPos);
+        
+        if (Physics.Raycast(_startPos.position, direction, out RaycastHit hit, maxDist, _aimMask))
+        {
+            _waterParticles.transform.rotation = Quaternion.LookRotation(direction);
+            
             var enemyController = hit.transform.gameObject.GetComponent<EnemyController>();
             enemyController.DamageEnemy(bulletDamage);
         }
+
+        Debug.DrawRay(_startPos.position, direction * maxDist, Color.red);
     }
 
     private void HandleShootRequested()
