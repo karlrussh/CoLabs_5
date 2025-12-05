@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WaterCooler : MonoBehaviour
+public class WaterCoolerSimple : MonoBehaviour
 {
 
     private void OnTriggerEnter(Collider other)
