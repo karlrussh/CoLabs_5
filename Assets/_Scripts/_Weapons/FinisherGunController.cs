@@ -31,6 +31,12 @@ public class FinisherGunController : MonoBehaviour
             {
                 Destroy(hit.transform.gameObject); // We need to setup a proper enemy health manager - this will do for now
             }
+            else if (hit.transform.gameObject.GetComponent<BaseDestructObject>())
+            {
+                BaseDestructObject obj = hit.transform.gameObject.GetComponent<BaseDestructObject>();
+                IShootable shootable = obj;
+                shootable.HandleOnBulletHit();
+            }
         }
         else
         {

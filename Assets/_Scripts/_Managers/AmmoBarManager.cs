@@ -32,7 +32,7 @@ public class AmmoBarManager : MonoBehaviour
 
     private void Update()
     {
-        if(_isShooting)
+       // if(_isShooting)
             _AmmoSlider.value = AmmoManager.Instance.AmmoCount;
     }
 
