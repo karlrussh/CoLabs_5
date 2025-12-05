@@ -94,10 +94,12 @@ public class EnemyController : MonoBehaviour
             healthSlider.gameObject.SetActive(false);
             
             statusText.SetText("cleansed");
+            statusText.color = Color.blue;
         }
         else
         {
             statusText.SetText("possessed");
+            statusText.color = Color.red;
         }
     }
 

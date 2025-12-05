@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     public GameState State;
     public static event Action<GameState> OnGameStateChanged;
+    
+    [SerializeField] private Canvas gameOverUI;
 
     private void Awake()
     {
@@ -75,6 +77,9 @@ public class GameManager : MonoBehaviour
     private void HandleGameOver()
     {
         PlayerManager.Instance.UpdatePlayerState(PlayerState.InGameOver);
+        if (!gameOverUI) return;
+        gameOverUI.enabled = true;
+        Cursor.visible = true;
     }
 
     private void HandleGamePaused()

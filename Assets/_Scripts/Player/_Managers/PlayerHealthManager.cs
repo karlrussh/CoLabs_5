@@ -68,11 +68,14 @@ public class PlayerHealthManager : MonoBehaviour
             Die();
         }
         
+        
         transform.DOShakePosition(0.25f, 0.25f, 5);
+        if (HealthCountManager.Instance)
+            HealthCountManager.Instance.ShakeHealthText();
     }
 
     private void Die()
     {
-        PlayerManager.Instance.UpdatePlayerState(PlayerState.InGameOver);
+        GameManager.Instance.UpdateGameState(GameState.GameOver);
     }
 }

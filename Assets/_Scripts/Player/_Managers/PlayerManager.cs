@@ -66,7 +66,7 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleInGameOver()
     {
-        throw new NotImplementedException();
+
     }
 
     private void HandleInDialogue()

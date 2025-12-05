@@ -41,6 +41,9 @@ public class ControlsManager : MonoBehaviour
         // Disables player input when needed
         switch (state)
         {
+            case GameState.GameOver:
+                enabled = false;
+                break;
             case GameState.Cutscene:
                 enabled = false;
                 break;
