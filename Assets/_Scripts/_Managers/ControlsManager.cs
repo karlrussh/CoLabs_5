@@ -21,6 +21,7 @@ public class ControlsManager : MonoBehaviour
     public static event Action OnPlayerJump;
 
     public static event Action OnPlayerSlide;
+    public static event Action OnPlayerBackflip;
     
     public static event Action OnPlayerReload;
 
@@ -119,6 +120,10 @@ public class ControlsManager : MonoBehaviour
         {
             Debug.Log("Player Sliding");
             OnPlayerSlide?.Invoke();
+        }
+        if (Input.GetButtonDown("Backflip"))
+        {
+            OnPlayerBackflip?.Invoke();
         }
     }
 

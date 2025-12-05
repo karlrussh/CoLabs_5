@@ -19,6 +19,7 @@ public class FinisherGunController : MonoBehaviour
 
     private void HandleCleanseShootRequested()
     {
+        
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(cameraRay, out RaycastHit hit, _maxDistance, _layerMask))
@@ -28,17 +29,18 @@ public class FinisherGunController : MonoBehaviour
             Debug.Log($"Hit: {hit.transform.gameObject.name}");
             Debug.DrawRay(_handStartPos.transform.position, aimDirection * _maxDistance, Color.red, 0.02f);
 
-            if (hit.transform.gameObject.GetComponent<EnemyController>() && hit.transform.gameObject.name == "Demon(Clone)") 
+            if (hit.transform.gameObject.GetComponent<SpriteEnemyController>())
             {
-                Destroy(hit.transform.gameObject); // We need to setup a proper enemy health manager - this will do for now
+                hit.transform.gameObject.GetComponent<SpriteEnemyController>().DamageEnemy(100f);
             }
-            else if (hit.transform.gameObject.GetComponent<BaseDestructObject>())
+
+            if (hit.transform.gameObject.GetComponent<BaseDestructObject>())
             {
+                Debug.Log("oops");
                 BaseDestructObject obj = hit.transform.gameObject.GetComponent<BaseDestructObject>();
                 IShootable shootable = obj;
                 shootable.HandleOnBulletHit();
-            }
-            hit.transform.gameObject.GetComponent<SpriteEnemyController>().DamageEnemy(100f);
+            }   
         }
         else
         {

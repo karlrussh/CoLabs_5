@@ -46,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
     {
         ControlsManager.OnPlayerJump += PlayerJump;
         ControlsManager.OnPlayerSlide += PlayerSlide;
+        ControlsManager.OnPlayerBackflip += PlayerBackflip;
+
         //ControlsManager.OnShootRequested += playerAimAndShoot.ShootNormal;
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChange;
         
@@ -55,6 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {
         ControlsManager.OnPlayerJump -= PlayerJump;
         ControlsManager.OnPlayerSlide -= PlayerSlide;
+        ControlsManager.OnPlayerBackflip -= PlayerBackflip;
 
         PlayerManager.OnPlayerStateChanged -= HandlePlayerStateChange;
     }
@@ -157,18 +160,24 @@ public class PlayerMovement : MonoBehaviour
     
     private void PlayerSlide()
     {
-        if (_BfRunning && IsGrounded())
-        {
-            //Debug.Log("Backflip");
-            StartCoroutine(BackflipRotation());
-            HandleMovementStateAnimator(MovementState.Backflip);
-            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower * 2);
-            return;
-        }
+        
         if (!IsGrounded() || movementState == MovementState.Sliding) return;
 
         SlideCoroutine = SlidingMomentum();
         StartCoroutine(SlideCoroutine);
+    }
+
+    //Debug.Log("Backflip");
+    private void PlayerBackflip()
+    {
+        Debug.Log("Backflip");
+        if (IsGrounded())
+        {
+            StartCoroutine(BackflipRotation());
+            HandleMovementStateAnimator(MovementState.Backflip);
+            rb.linearVelocity = new Vector3(rb.linearVelocity.x, jumpingPower * 2);
+            return;
+        }            
     }
 
     private void PlayerLunge()

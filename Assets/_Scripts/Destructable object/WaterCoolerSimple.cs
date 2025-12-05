@@ -5,6 +5,7 @@ public class WaterCoolerSimple : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.tag == "Untagged") return;
         Debug.Log("Hi");
         if (other.tag == "Player")
         {

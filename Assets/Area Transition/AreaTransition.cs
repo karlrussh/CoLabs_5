@@ -9,17 +9,7 @@ public class AreaTransition : MonoBehaviour
     [SerializeField] private Vector3 teleportLocation;
     [SerializeField] private GameObject player;
     [SerializeField] private Animator animator;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private float transTime = 0.5f;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -31,9 +21,9 @@ public class AreaTransition : MonoBehaviour
     {
         Debug.Log("lol");
         animator.SetBool("transitionTriggered?", true);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(transTime);
         player.transform.position = teleportLocation;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(transTime);
         animator.SetBool("isFinished?", true);
         animator.SetBool("transitionTriggered?", false);
         yield return null;
