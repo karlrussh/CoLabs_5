@@ -17,7 +17,7 @@ public class SubtitleManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && dialogueActive)
+        if(Input.GetKeyDown(KeyCode.E) && dialogueActive)
         {
             if(textComponent.text == lines[index])
             {

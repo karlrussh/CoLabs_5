@@ -17,6 +17,8 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] private SubtitleManager subtitles;
     [SerializeField] private GameManager manager;
     private GameState beforeDialogue;
+    private bool popeIsSpeaking = false;
+    private bool phoneRinging = false;
 
     private float startTime, journeyLength;
     private float speed = 200;
@@ -33,10 +35,12 @@ public class PhoneScript : MonoBehaviour
         PhoneAudio.clip = phoneData.ringTone;
         PhoneAudio.Play();
         phoneAudioClip = phoneData.phoneCall;
+        phoneRinging = true;
     }
 
     public void AcceptCall()
     {
+        popeIsSpeaking = true;
         PhoneAudio.clip = phoneAudioClip;
         PhoneAudio.Play();
         beforeDialogue = manager.State;
@@ -52,6 +56,7 @@ public class PhoneScript : MonoBehaviour
         manager.State = beforeDialogue;
         PhoneAudio.Stop();
         hinge.SetBool("Bobbing", false);
+        popeIsSpeaking = false;
     }
 
     private void Update()
@@ -68,12 +73,13 @@ public class PhoneScript : MonoBehaviour
             float fractionOfJourney = distCovered / journeyLength;
             Phone.transform.position = Vector3.Lerp(endPos.transform.position, startPos.transform.position, fractionOfJourney);
         }
-        if (Input.GetKeyDown("1"))
+        //if (Input.GetKeyDown("1"))
+        //{
+        //    PhoneCall(call);
+        //}
+        if (Input.GetKeyDown(KeyCode.E) && !popeIsSpeaking && phoneRinging)
         {
-            PhoneCall(call);
-        }
-        if (Input.GetKeyDown("2"))
-        {
+            phoneRinging = false;
             AcceptCall();
         }
     }
