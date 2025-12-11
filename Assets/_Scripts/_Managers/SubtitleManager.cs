@@ -10,6 +10,7 @@ public class SubtitleManager : MonoBehaviour
     [SerializeField] private float textSpeed;
     [SerializeField] private GameObject subtitles;
     [SerializeField] private PhoneScript phone;
+    [SerializeField] public string callerID;
 
     private int index;
     private char seperator = '\n';
@@ -19,14 +20,14 @@ public class SubtitleManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.E) && dialogueActive)
         {
-            if(textComponent.text == lines[index])
+            if(textComponent.text == "<b>" + callerID + ":</b> " + lines[index])
             {
                 NextLine();
             }
             else
             {
                 StopAllCoroutines();
-                textComponent.text = lines[index];
+                textComponent.text = "<b>" + callerID + ":</b> " + lines[index];
             }
         }
     }
@@ -44,7 +45,8 @@ public class SubtitleManager : MonoBehaviour
     
     private IEnumerator DisplayText()
     {
-        foreach(char c in lines[index].ToCharArray() )
+        textComponent.text = ("<b>" + callerID + ":</b> ");
+        foreach (char c in lines[index].ToCharArray() )
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);

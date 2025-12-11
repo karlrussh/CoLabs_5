@@ -31,7 +31,7 @@ public class PhoneScript : MonoBehaviour
         journeyLength = Vector3.Distance(startPos.transform.position, endPos.transform.position);
         ImgTop.GetComponent<Image>().sprite = phoneData.callerPfpTop;
         ImgBottom.GetComponent<Image>().sprite = phoneData.callerPfpBottom;
-        CallerID.text = phoneData.callerID;
+        subtitles.callerID = phoneData.callerID;
         PhoneAudio.clip = phoneData.ringTone;
         PhoneAudio.Play();
         phoneAudioClip = phoneData.phoneCall;
