@@ -10,6 +10,7 @@ public class DialogueTrigger : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             phone.PhoneCall(phoneSO);
+            gameObject.SetActive(false);
         }
     }
    
