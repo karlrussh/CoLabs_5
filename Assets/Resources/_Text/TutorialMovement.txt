@@ -1,0 +1,4 @@
+Greetings, I am The Pope.
+I know you're a trained professional and all, but let's go over the basics.
+Press A and D to move left and right respectively.
+Press space to jump.

@@ -46,9 +46,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeInOut: {fileID: 0}
-  teleportLocation: {x: 6.51, y: 5.45, z: 0}
+  teleportLocation: {x: 45.72, y: 7.29, z: 0.39813995}
   player: {fileID: 0}
   animator: {fileID: 0}
+  transTime: 2
 --- !u!65 &7696801775719472840
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -64,7 +65,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

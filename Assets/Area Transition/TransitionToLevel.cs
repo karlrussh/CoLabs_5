@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Animations;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class AreaTransition : MonoBehaviour
+public class TransitionToLevel : MonoBehaviour
 {
     [SerializeField] private Image fadeInOut;
-    [SerializeField] private Vector3 teleportLocation;
     [SerializeField] private GameObject player;
     [SerializeField] private Animator animator;
     [SerializeField] private float transTime = 0.5f;
@@ -27,12 +27,7 @@ public class AreaTransition : MonoBehaviour
         Debug.Log("lol");
         animator.SetBool("transitionTriggered?", true);
         yield return new WaitForSeconds(transTime);
-        player.transform.position = teleportLocation;
-        yield return new WaitForSeconds(transTime);
-        animator.SetBool("isFinished?", true);
-        animator.SetBool("transitionTriggered?", false);
-        yield return null;
-        animator.SetBool("isFinished?", false);
+        SceneManager.LoadScene("Cory-EnemyTest");
     }
 
 
