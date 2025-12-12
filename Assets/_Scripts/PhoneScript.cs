@@ -16,10 +16,11 @@ public class PhoneScript : MonoBehaviour
     [SerializeField] private PhoneSO call;
     [SerializeField] private SubtitleManager subtitles;
     [SerializeField] private GameManager manager;
+    [SerializeField] private GameObject tutorialText;
     private GameState beforeDialogue;
     private bool popeIsSpeaking = false;
     private bool phoneRinging = false;
-
+    private bool firstCall = true;
     private float startTime, journeyLength;
     private float speed = 200;
     public void PhoneCall(PhoneSO phoneData)
@@ -47,6 +48,7 @@ public class PhoneScript : MonoBehaviour
         manager.State = GameState.Dialogue;
         subtitles.StartDialogue();
         hinge.SetBool("Bobbing", true);
+        firstCall = false;
     }
     public void EndPhoneCall()
     {
@@ -57,6 +59,7 @@ public class PhoneScript : MonoBehaviour
         PhoneAudio.Stop();
         hinge.SetBool("Bobbing", false);
         popeIsSpeaking = false;
+        firstCall = false;
     }
 
     private void Update()
@@ -80,7 +83,18 @@ public class PhoneScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && !popeIsSpeaking && phoneRinging)
         {
             phoneRinging = false;
+            firstCall = false;
             AcceptCall();
+        }
+
+        if(Input.GetKeyDown(KeyCode.Q) && popeIsSpeaking && !phoneRinging)
+        {
+            EndPhoneCall();
+        }
+
+        if (!firstCall)
+        {
+            tutorialText.SetActive(false);
         }
     }
 
