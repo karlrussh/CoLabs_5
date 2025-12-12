@@ -7,6 +7,7 @@ public class BaseDestructObject : MonoBehaviour, IShootable
 
     public void DropPickup()
     {
+        if (pickup == null) return;
         Debug.Log("Dropping: " +  pickup);
         
         GameObject pickupInstance = Instantiate(pickup, transform.position, Quaternion.identity);
