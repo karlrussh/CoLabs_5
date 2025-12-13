@@ -386,6 +386,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Area 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4802694973442569137, guid: 39e900d8572a81d4585435665195c47b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.08
+      objectReference: {fileID: 0}
     - target: {fileID: 5545058320510517933, guid: 39e900d8572a81d4585435665195c47b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 103
