@@ -1,9 +1,4 @@
-using System;
-using Mono.Cecil;
-using TMPro;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class SpriteEnemyController : MonoBehaviour
 {
