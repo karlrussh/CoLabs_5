@@ -13,6 +13,11 @@ public class GunIndicatorManager : MonoBehaviour
         PlayerManager.OnPlayerStateChanged += HandlePlayerStateChanged;
     }
 
+    private void OnDisable()
+    {
+        PlayerManager.OnPlayerStateChanged -= HandlePlayerStateChanged;
+    }
+
     private void HandlePlayerStateChanged(PlayerState state)
     {
         switch (state)
