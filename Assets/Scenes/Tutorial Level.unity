@@ -2187,26 +2187,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 531821370296729336, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 531821370296729336, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_fontSize
-      value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 531821370296729336, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_margin.z
-      value: 153.81265
-      objectReference: {fileID: 0}
-    - target: {fileID: 891900693254694829, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -3.8500977
-      objectReference: {fileID: 0}
-    - target: {fileID: 891900693254694829, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -197
-      objectReference: {fileID: 0}
     - target: {fileID: 1527140412991968877, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2289,19 +2269,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1804533776042944134, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
       propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936189514577030088, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 250.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1936189514577030088, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 43.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7064035039972993354, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7747418794240527602, guid: 5d979a607511560428afdc3644e75a5e, type: 3}
       propertyPath: m_Name
