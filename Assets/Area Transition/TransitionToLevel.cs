@@ -27,7 +27,7 @@ public class TransitionToLevel : MonoBehaviour
         Debug.Log("lol");
         animator.SetBool("transitionTriggered?", true);
         yield return new WaitForSeconds(transTime);
-        SceneManager.LoadScene("Title Scene");
+        SceneManager.LoadScene("Title Screen");
     }
 
 
