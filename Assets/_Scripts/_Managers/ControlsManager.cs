@@ -1,8 +1,5 @@
 using UnityEngine;
 using System;
-using UnityEngine.InputSystem;
-using System.Collections;
-using UnityEditor.Searcher;
 
 public class ControlsManager : MonoBehaviour
 {
